@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HelpDesk - Trouble Tickets</title>
+  <link rel="stylesheet" href="ticketpage.css"> <!-- Arquivo CSS para estilização -->
+</head>
+<body>
+  <header>
+    <h1>HelpDesk</h1>
+    <nav>
+      <ul>
+        <li><a href="homepage.html">Home</a></li>
+        <li><a href="ticketpage.html">Tickets</a></li>
+        <li><a href="#">Departments</a></li>
+        <li><a href="#">Agents</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">About us</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="newticket">
+        <div class="ticket-form">
+          <h2>Criar Novo Ticket</h2>
+          <form action="processar_ticket.php" method="post"> <!-- Ação e método do formulário, a ser processado no servidor -->
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao" required></textarea>
+            <input type="submit" value="Enviar">
+          </form>
+        </div>
+    </section>
+    <section class="tickets">
+      <h2>Tickets Abertos <button id="novoTicketBtn">Novo Ticket</button></h2> 
+      <ul>
+        <li>
+          <div class="ticket">
+            <h3>Título do Ticket</h3>
+            <p>Descrição breve do problema</p>
+            <a href="#" class="button">Detalhes</a>
+          </div>
+        </li>
+        <li>
+          <div class="ticket">
+            <h3>Título do Ticket</h3>
+            <p>Descrição breve do problema</p>
+            <a href="#" class="button">Detalhes</a>
+          </div>
+        </li>
+        <!-- Adicionar mais tickets aqui -->
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2023 HelpDesk. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>

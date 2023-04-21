@@ -1,0 +1,151 @@
+/* Arquivo style.css */
+
+/* Reset de estilos para o body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+  }
+  
+  /* Estilos para o cabeçalho */
+  header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 36px;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    color: #ccc;
+  }
+  
+  /* Estilos para os tickets */
+  .tickets {
+    margin: 40px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin: 0 0 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .ticket {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .ticket h3 {
+    margin: 0 0 10px;
+  }
+  
+  .ticket p {
+    margin: 0 0 20px;
+  }
+  
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilos para o rodapé */
+  footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+  }
+
+  /* Estilos para o botão Novo Ticket */
+#novoTicketBtn {
+    background-color: #007bff; /* Cor de fundo do botão */
+    color: #fff; /* Cor do texto do botão */
+    border: none; /* Remover borda do botão */
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    cursor: pointer; /* Cursor do mouse em formato de mão */
+    font-size: 16px; /* Tamanho da fonte do botão */
+    border-radius: 4px; /* Arredondamento das bordas do botão */
+    float: right;
+  }
+  
+  /* Estilos de hover para o botão Novo Ticket */
+  #novoTicketBtn:hover {
+    background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+  }
+
+  .ticket-form {
+    display: none;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .ticket-form h2 {
+    margin-top: 0;
+  }
+  
+  .ticket-form form {
+    margin-top: 20px;
+  }
+  
+  .ticket-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .ticket-form input[type="text"],
+  .ticket-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .ticket-form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .ticket-form input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
