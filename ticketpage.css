@@ -18,7 +18,13 @@ body {
   h1 {
     margin: 0;
     font-size: 36px;
+    margin-bottom: 1%;
   }
+  h1 > a {
+    text-decoration: none;
+    color: white;
+  }
+  
   
   nav ul {
     list-style-type: none;
@@ -41,6 +47,10 @@ body {
     color: #ccc;
   }
   
+  body > header > nav > ul > li:nth-child(1) > a {
+    margin-left: 0%;
+  }
+
   /* Estilos para os tickets */
   .tickets {
     margin: 40px;
@@ -95,7 +105,8 @@ body {
   }
 
   /* Estilos para o botão Novo Ticket */
-#novoTicketBtn {
+  
+body > main > section.tickets > h2 > a {
     background-color: #007bff; /* Cor de fundo do botão */
     color: #fff; /* Cor do texto do botão */
     border: none; /* Remover borda do botão */
@@ -106,10 +117,7 @@ body {
     float: right;
   }
   
-  /* Estilos de hover para o botão Novo Ticket */
-  #novoTicketBtn:hover {
-    background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
-  }
+
 
   .ticket-form {
     display: none;
@@ -148,4 +156,20 @@ body {
   .ticket-form input[type="submit"]:hover {
     background-color: #0056b3;
   }
+
+  /* Estilos para o botão Novo Ticket */
+  #logout {
+    background-color: #007bff; /* Cor de fundo do botão */
+    color: #fff; /* Cor do texto do botão */
+    border: none; /* Remover borda do botão */
+    cursor: pointer; /* Cursor do mouse em formato de mão */
+    font-size: 16px; /* Tamanho da fonte do botão */
+    border-radius: 4px; /* Arredondamento das bordas do botão */
+    float: right;
+    text-align: center;
+  }
   
+  /* Estilos de hover para o botão Novo Ticket */
+  #logout:hover {
+    background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+  }

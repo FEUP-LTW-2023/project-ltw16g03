@@ -1,0 +1,79 @@
+/* Arquivo style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+  }
+  
+  header h1 {
+    margin: 0;
+  }
+  
+  nav {
+    background-color: #007bff;
+    padding: 10px;
+  }
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  .ticket-form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .ticket-form h2 {
+    margin-top: 0;
+  }
+  
+  .ticket-form form {
+    margin-top: 20px;
+  }
+  
+  .ticket-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .ticket-form input[type="text"],
+  .ticket-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .ticket-form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .ticket-form input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
