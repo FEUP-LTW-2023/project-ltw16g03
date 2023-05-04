@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Client;
 DROP TABLE IF EXISTS Agent;
 DROP TABLE IF EXISTS admins;
@@ -11,71 +11,59 @@ DROP TABLE IF EXISTS Faq;
 
 --Tables
 
-CREATE TABLE users (
-   id SERIAL,
-   username varchar(255) NOT NULL UNIQUE,
-   firstName varchar(255) NOT NULL,
-   lastName varchar(255) NOT NULL,
-   email varchar(255) NOT NULL UNIQUE,
-   password varchar(255) NOT NULL,
-   is_client boolean NOT NULL DEFAULT true,
-   is_agent boolean NOT NULL DEFAULT false,
-   is_admin boolean NOT NULL DEFAULT false,
-   CONSTRAINT id_userPK PRIMARY KEY(id)
-);
+/*  
+    As tabelas Client, Agent e Admin eram irrelevantes pois tudo o que faziam era redirecionar para esta tabela, eram apenas confortáveis
+    Qualquer user pode criar um ticket, não interessa se é client, agent ou admin.
+    Mas só agents ou admins podem fazer certas ações.ABORT
+    Se is_agent for true, id_department terá um valor
+    Ao verificar se um user tem permissões, primeiro ver se é admin, depois se é agent, caso não seja nenhum, é client
+*/
 
-CREATE TABLE Client (
-    id INTEGER REFERENCES users (id) ON DELETE CASCADE,
-    CONSTRAINT id_clientPK PRIMARY KEY(id)
-);
-
-CREATE TABLE Agent (
-    id INTEGER REFERENCES users (id) ON DELETE CASCADE,
-    id_department INTEGER,
-    CONSTRAINT id_agentPK PRIMARY KEY(id),
-    CONSTRAINT id_departmentFK FOREIGN KEY(id_department) REFERENCES Department (id)
-);
-
-CREATE TABLE admins (
-    id INTEGER REFERENCES users (id) ON DELETE CASCADE,
-    CONSTRAINT id_adminPK PRIMARY KEY(id)
-);
+CREATE TABLE User (
+     id INTEGER PRIMARY KEY AUTOINCREMENT,
+     username varchar(255) NOT NULL UNIQUE,
+     firstName varchar(255) NOT NULL,
+     lastName varchar(255) NOT NULL,
+     email varchar(255) NOT NULL UNIQUE,
+     password varchar(255) NOT NULL,
+     id_department INTEGER DEFAULT NULL,
+     is_agent boolean NOT NULL DEFAULT false,
+     is_admin boolean NOT NULL DEFAULT false
+ );
 
 CREATE TABLE Task (
-    id SERIAL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     title varchar(255) NOT NULL,
     description TEXT NOT NULL,
     is_completed BOOLEAN NOT NULL DEFAULT False,
-    id_agent INTEGER,
-    CONSTRAINT id_taskPK PRIMARY KEY(id),
-    CONSTRAINT id_agentFK FOREIGN KEY(id_agent) REFERENCES Agent (id) ON DELETE CASCADE
+    id_user INTEGER,
+    CONSTRAINT id_userFK FOREIGN KEY(id_user) REFERENCES User(id_user) ON DELETE CASCADE
 );
 
 CREATE TABLE Department (
-    id SERIAL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name varchar(255) NOT NULL UNIQUE,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE Ticket (
-    id SERIAL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     title varchar(255) NOT NULL UNIQUE,
-    description TEXT NOT NULL,
+    descriptions VARCHAR(255) NOT NULL,
     ticket_status VARCHAR (10)  NOT NULL DEFAULT 'Open' CHECK (ticket_status IN ('Open', 'Assigned', 'Resolved', 'Closed')),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    id_client INTEGER,
-    id_agent INTEGER,
-    id_department INTEGER,
-    CONSTRAINT id_ticketPK PRIMARY KEY(id),
+    id_user INTEGER, /* id do client que criou o ticket */
+    id_agent INTEGER, /* id do agent que está a tratar do ticket */
+    id_department INTEGER, /* id do department do ticket */
     CONSTRAINT current_edit_date_ck CHECK (created_at <= updated_at),
-    CONSTRAINT id_clientFK FOREIGN KEY(id_client) REFERENCES Client (id),
-    CONSTRAINT id_agentFK FOREIGN KEY(id_agent) REFERENCES Agent (id),
-    CONSTRAINT id_departmentFK FOREIGN KEY(id_department) REFERENCES Department (id)
+    CONSTRAINT id_usertFK FOREIGN KEY(id_user) REFERENCES User(id_user),
+    CONSTRAINT id_agentFK FOREIGN KEY(id_agent) REFERENCES User(id_user),
+    CONSTRAINT id_departmentFK FOREIGN KEY(id_department) REFERENCES Department(id)
 );
 
 CREATE TABLE Hashtag (
-    id SERIAL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     tag varchar(255) NOT NULL UNIQUE
 );
 
@@ -88,7 +76,10 @@ CREATE TABLE Ticket_Hashtag (
 );
 
 CREATE TABLE Faq (
-    id SERIAL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     title varchar(255) NOT NULL UNIQUE,
     description text NOT NULL
 );
+
+/*insert into Ticket(title, descriptions) values ("Isto é um ticket", "Isto é um ticket de teste :)");
+insert into Ticket(title, descriptions) values ("Isto também é um ticket", "Isto é um ticket de teste :)");*

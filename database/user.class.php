@@ -1,7 +1,7 @@
 <?php
   declare(strict_types = 1);
 
-  class users {
+  class User {
     public int $id;
     public string $username;
     public string $firstName;
@@ -28,55 +28,55 @@
 
     function save($db) {
       $stmt = $db->prepare('
-        UPDATE users SET firstName = ?, lastName = ?
+        UPDATE User SET firstName = ?, lastName = ?
         WHERE id = ?
       ');
 
       $stmt->execute(array($this->firstName, $this->lastName, $this->id));
     }
     
-    static function getUserWithPassword(PDO $db, string $email, string $password) : ?users {
+    static function getUserWithPassword(PDO $db, string $email, string $password) : ?User {
       $stmt = $db->prepare('
         SELECT id, username, firstName, lastName, email, is_client, is_agent, is_admin
-        FROM users 
+        FROM User 
         WHERE lower(email) = ? AND password = ?
       ');
 
       $stmt->execute(array(strtolower($email), sha1($password)));
   
-      if ($users = $stmt->fetch()) {
-        return new users(
-          $users['id'],
-          $users['username'],
-          $users['firstName'],
-          $users['lastName'],
-          $users['email'],
-          $users['is_client'],
-          $users['is_agent'],
-          $users['is_admin']
+      if ($user = $stmt->fetch()) {
+        return new User(
+          $user['id'],
+          $user['username'],
+          $user['firstName'],
+          $user['lastName'],
+          $user['email'],
+          $user['is_client'],
+          $user['is_agent'],
+          $user['is_admin']
         );
       } else return null;
     }
 
-    static function getUser(PDO $db, int $id) : users {
+    static function getUser(PDO $db, int $id) : User {
       $stmt = $db->prepare('
         SELECT id, username, firstName, lastName, email, is_client, is_agent, is_admin
-        FROM users 
+        FROM User 
         WHERE id = ?
       ');
 
       $stmt->execute(array($id));
-      $customer = $stmt->fetch();
+      $user = $stmt->fetch();
       
-      return new users(
-        $users['id'],
-        $users['username'],
-        $users['firstName'],
-        $users['lastName'],
-        $users['email'],
-        $users['is_client'],
-        $users['is_agent'],
-        $users['is_admin']
+      return new User(
+        $user['id'],
+        $user['username'],
+        $user['firstName'],
+        $user['lastName'],
+        $user['email'],
+        $user['is_client'],
+        $user['is_agent'],
+        $user['is_admin']
       );
     }
 

@@ -1,21 +1,7 @@
 /* Arquivo style.css */
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
   
-  header {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px;
-  }
-  
-  header h1 {
-    margin: 0;
-  }
-  
+ 
+ 
   nav {
     background-color: #007bff;
     padding: 10px;
@@ -34,10 +20,6 @@ body {
   nav a {
     color: white;
     text-decoration: none;
-  }
-  
-  main {
-    padding: 20px;
   }
   
   .ticket-form {
@@ -76,4 +58,13 @@ body {
   .ticket-form input[type="submit"]:hover {
     background-color: #0056b3;
   }
-  
+  body > main > div > form > label:nth-child(3) {
+    display: block;
+    margin-top: 10px;
+    padding-top: 5px;
+  }
+  body > main > div > form > label:nth-child(5) {
+    display: block;
+    margin-top: 10px;
+    padding-top: 5px;
+  }

@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>HelpDesk - Register</title>
-  <link rel="stylesheet" href="register.css">
-</head>
-<body>
-  <header>
-    <h1><a href="login.html">HelpDesk</a></h1>  </header>
-  <main>
+<?php
+declare(strict_types = 1);
+require_once(__DIR__ . '/../templates/header.tpl.php');
+require_once(__DIR__ . '/../templates/footer.tpl.php');
+
+drawHeader();
+?>
+
     <h2>Register</h2>
     <form action="register.php" method="post">
       <label for="name">Name:</label>
@@ -28,9 +26,8 @@
       <input type="submit" value="Register">
     </form>
     <p>Already have an account? <a href="login.html">Login here</a>.</p>
-  </main>
-  <footer>
-    <p>&copy; 2023 HelpDesk. Todos os direitos reservados.</p>
-  </footer>
-</body>
-</html>
+  
+
+<?php
+  drawFooter();
+?>

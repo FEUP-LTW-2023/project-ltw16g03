@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>HelpDesk</title>
-  <link rel="stylesheet" href="login.css">
-</head>
-<body>
-  <header>
-    <h1><a href="login.html">HelpDesk</a></h1>
-  </header>
+<?php
+  declare(strict_types = 1);
+  require_once(__DIR__ . '/../templates/header.tpl.php');
+  require_once(__DIR__ . '/../templates/footer.tpl.php');
+
+  drawHeader();
+?>
+
   <p>Welcome to your favourite ticket platform. To continue, please login into your</p>
-  <main>
     <form action="login.php" method="post">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
@@ -20,9 +17,8 @@
       <input type="submit" value="Login">
     </form>
     <p>Don't have an account? <a href="register.html">Register here</a>.</p>
-  </main>
-  <footer>
-    <p>&copy; 2023 HelpDesk. Todos os direitos reservados.</p>
-  </footer>
-</body>
-</html>
+  
+
+<?php
+  drawFooter();
+?>
