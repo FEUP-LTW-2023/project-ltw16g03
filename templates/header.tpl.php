@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="../css/novo_ticket.css"> 
         <link rel="stylesheet" href="../css/login.css"> 
         <link rel="stylesheet" href="../css/register.css">
+        <script src="../javascript/script.js" defer></script>
     </head>
     <body>
         <header>
