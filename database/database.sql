@@ -82,4 +82,15 @@ CREATE TABLE Faq (
 );
 
 /*insert into Ticket(title, descriptions) values ("Isto é um ticket", "Isto é um ticket de teste :)");
-insert into Ticket(title, descriptions) values ("Isto também é um ticket", "Isto é um ticket de teste :)");*
+insert into Ticket(title, descriptions) values ("Isto também é um ticket", "Isto é um ticket de teste :)");*/
+
+INSERT INTO Department (id, name) VALUES (1, 'ola');
+INSERT INTO Department (id, name) VALUES (2, 'Department 2');
+INSERT INTO Department (id, name) VALUES (3, 'Department 3');
+INSERT INTO Department (id, name) VALUES (4, 'Department 4');
+INSERT INTO Department (id, name) VALUES (5, 'Department 5');
+INSERT INTO Department (id, name) VALUES (6, 'Department 6');
+INSERT INTO Department (id, name) VALUES (7, 'Department 7');
+INSERT INTO Department (id, name) VALUES (8, 'Department 8');
+INSERT INTO Department (id, name) VALUES (9, 'Department 9');
+INSERT INTO Department (id, name) VALUES (10, 'ooooliiii');
