@@ -13,7 +13,7 @@
 
   if ($ticket_id) {
     $session->addMessage('success', 'Ticket successful!');
-    header('Location: ../ticketpage.php#' . $ticket_id);
+    header("Location: ../pages/ticketpage.php?id=$ticket_id");
   } else {
     $session->addMessage('error', 'Wrong password!');
     header('Location: ../ticketpage.php');

@@ -2,7 +2,7 @@ header {
     background-color: #007bff;
     color: #fff;
     padding: 20px;
-  }
+}
 
 header h1 {
     margin: 0;
@@ -14,7 +14,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
 }
-  
+
 main {
     max-width: 400px;
     margin: 20px auto;
@@ -29,3 +29,239 @@ footer {
     text-align: center;
 }
 
+#logout {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    float: right;
+    text-align: center;
+}
+
+#logout:hover {
+    background-color: #0056b3;
+    /* Cor de fundo do botão ao passar o mouse */
+}
+
+body>header>h1>a {
+    text-decoration: none;
+    color: white;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    display: inline-block;
+    width: 250px;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #007bff;
+}
+
+nav {
+    background-color: #007bff;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.ticket-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.ticket-form h2 {
+    margin-top: 0;
+}
+
+.ticket-form form {
+    margin-top: 20px;
+}
+
+.ticket-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.ticket-form input[type="text"],
+.ticket-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.ticket-form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.ticket-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+body>main>section.tickets>ul>h3 {
+    margin-top: 5%;
+}
+
+body>main>div>form>label:nth-child(3) {
+    display: block;
+    margin-top: 10px;
+    padding-top: 5px;
+}
+
+body>main>div>form>label:nth-child(5) {
+    display: block;
+    margin-top: 10px;
+    padding-top: 5px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 36px;
+    margin-bottom: 1%;
+}
+
+h1>a {
+    text-decoration: none;
+    color: white;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ccc;
+}
+
+body>header>nav>ul>li:nth-child(1)>a {
+    margin-left: 0%;
+}
+
+/* Estilos para os tickets */
+.tickets {
+    margin: 40px;
+}
+
+h2 {
+    font-size: 24px;
+    margin: 0 0 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ticket {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.ticket h3 {
+    margin: 0 0 10px;
+}
+
+.ticket p {
+    margin: 0 0 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Estilos para o botão Novo Ticket */
+
+body>main>section.tickets>h2>a {
+    background-color: #007bff;
+    /* Cor de fundo do botão */
+    color: #fff;
+    /* Cor do texto do botão */
+    border: none;
+    /* Remover borda do botão */
+    padding: 10px 20px;
+    /* Espaçamento interno do botão */
+    cursor: pointer;
+    /* Cursor do mouse em formato de mão */
+    font-size: 16px;
+    /* Tamanho da fonte do botão */
+    border-radius: 4px;
+    /* Arredondamento das bordas do botão */
+    float: right;
+}

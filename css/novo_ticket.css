@@ -2,7 +2,7 @@
   
  
  
-  nav {
+  /*nav {
     background-color: #007bff;
     padding: 10px;
   }
@@ -20,9 +20,9 @@
   nav a {
     color: white;
     text-decoration: none;
-  }
+  }*/
   
-  .ticket-form {
+  /*.ticket-form {
     max-width: 400px;
     margin: 0 auto;
   }
@@ -38,9 +38,9 @@
   .ticket-form label {
     display: block;
     margin-bottom: 5px;
-  }
+  }*/
   
-  .ticket-form input[type="text"],
+  /*.ticket-form input[type="text"],
   .ticket-form textarea {
     width: 100%;
     padding: 10px;
@@ -57,8 +57,8 @@
   
   .ticket-form input[type="submit"]:hover {
     background-color: #0056b3;
-  }
-  body > main > div > form > label:nth-child(3) {
+  }*/
+  /*body > main > div > form > label:nth-child(3) {
     display: block;
     margin-top: 10px;
     padding-top: 5px;
@@ -67,4 +67,4 @@
     display: block;
     margin-top: 10px;
     padding-top: 5px;
-  }
+  }*/

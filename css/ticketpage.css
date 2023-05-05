@@ -1,7 +1,7 @@
 /* Arquivo style.css */
 
 
-  h1 {
+/*  h1 {
     margin: 0;
     font-size: 36px;
     margin-bottom: 1%;
@@ -37,7 +37,7 @@
     margin-left: 0%;
   }
 
-  /* Estilos para os tickets */
+  // Estilos para os tickets
   .tickets {
     margin: 40px;
   }
@@ -84,20 +84,20 @@
   }
   
 
-  /* Estilos para o botão Novo Ticket */
+  // Estilos para o botão Novo Ticket
   
 body > main > section.tickets > h2 > a {
-    background-color: #007bff; /* Cor de fundo do botão */
-    color: #fff; /* Cor do texto do botão */
-    border: none; /* Remover borda do botão */
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    cursor: pointer; /* Cursor do mouse em formato de mão */
-    font-size: 16px; /* Tamanho da fonte do botão */
-    border-radius: 4px; /* Arredondamento das bordas do botão */
+    background-color: #007bff; // Cor de fundo do botão 
+    color: #fff; // Cor do texto do botão 
+    border: none; // Remover borda do botão 
+    padding: 10px 20px; // Espaçamento interno do botão 
+    cursor: pointer; // Cursor do mouse em formato de mão 
+    font-size: 16px; // Tamanho da fonte do botão 
+    border-radius: 4px; // Arredondamento das bordas do botão 
     float: right;
   }
-  
-  .ticket-form {
+  */
+  /*.ticket-form {
     display: none;
     max-width: 400px;
     margin: 0 auto;
@@ -114,9 +114,9 @@ body > main > section.tickets > h2 > a {
   .ticket-form label {
     display: block;
     margin-bottom: 5px;
-  }
+  }*/
   
-  .ticket-form input[type="text"],
+  /*.ticket-form input[type="text"],
   .ticket-form textarea {
     width: 100%;
     padding: 10px;
@@ -133,25 +133,27 @@ body > main > section.tickets > h2 > a {
   
   .ticket-form input[type="submit"]:hover {
     background-color: #0056b3;
-  }
+  }*/
 
   /* Estilos para o botão Novo Ticket */
+  /*
   #logout {
-    background-color: #007bff; /* Cor de fundo do botão */
-    color: #fff; /* Cor do texto do botão */
-    border: none; /* Remover borda do botão */
-    cursor: pointer; /* Cursor do mouse em formato de mão */
-    font-size: 16px; /* Tamanho da fonte do botão */
-    border-radius: 4px; /* Arredondamento das bordas do botão */
+    background-color: #007bff; // Cor de fundo do botão 
+    color: #fff; // Cor do texto do botão 
+    border: none; // Remover borda do botão 
+    cursor: pointer; // Cursor do mouse em formato de mão 
+    font-size: 16px; // Tamanho da fonte do botão 
+    border-radius: 4px; // Arredondamento das bordas do botão 
     float: right;
     text-align: center;
   }
+  */
   
   /* Estilos de hover para o botão Novo Ticket */
-  #logout:hover {
-    background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
-  }
+  /*#logout:hover {
+    background-color: #0056b3; //Cor de fundo do botão ao passar o mouse
+  }*/
 
-  body > main > section.tickets > ul > h3 {
+  /*body > main > section.tickets > ul > h3 {
     margin-top: 5%;
-  }
+  }*/

@@ -6,10 +6,10 @@
   drawHeader();
 ?>
 
-  <section class="newticket">
+  <!--<section class="newticket">
     <div class="ticket-form">
       <h2>Criar Novo Ticket</h2>
-        <form action="../actions/processar_ticket.php" method="post"> <!-- Ação e método do formulário, a ser processado no servidor -->
+        <form action="../actions/processar_ticket.php" method="post">  Ação e método do formulário, a ser processado no servidor
           <label for="nome">Nome:</label>
           <input type="text" id="nome" name="nome" required>
           <label for="descricao">Descrição:</label>
@@ -17,7 +17,7 @@
           <input type="submit" value="Enviar">
         </form>
       </div>
-  </section>
+  </section>-->
   <section class="tickets">
       <h2>Tickets Abertos 
         <a href="novo_ticket.php" class="button">Criar Novo Ticket</a>
