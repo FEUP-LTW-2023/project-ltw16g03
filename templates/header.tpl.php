@@ -19,17 +19,17 @@
     <body>
         <header>
             <h1><a href = "/pages/ticketpage.php">HelpDesk</a></h1>
-            <section class = "logout-edit">
-            <button id="logout">Logout</button> 
-            <button id="logout">Edit Profile</button>
+            <section class="logout-edit">
+                <a href="logout.php"><button id="logout">Logout</button></a>
+                <a href="edit_profile.php"><button id="logout">Edit Profile</button></a>
             </section>
             <nav>
             <ul>
                 <li><a href="/pages/ticketpage.php">My Tickets</a></li>
-                <li><a href="#">Departments</a></li>
+                <li><a href="/pages/department.php">Departments</a></li>
                 <li><a href="#">Agents</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">About us</a></li>
+                <li><a href="/pages/faq.php">FAQ</a></li>
+                <li><a href="/pages/aboutus.php">About us</a></li>
             </ul>
             </nav>
         </header>

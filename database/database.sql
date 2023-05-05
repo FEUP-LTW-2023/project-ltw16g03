@@ -94,3 +94,11 @@ INSERT INTO Department (id, name) VALUES (7, 'Department 7');
 INSERT INTO Department (id, name) VALUES (8, 'Department 8');
 INSERT INTO Department (id, name) VALUES (9, 'Department 9');
 INSERT INTO Department (id, name) VALUES (10, 'ooooliiii');
+
+INSERT INTO Faq (id, title, description) VALUES (1, 'What is a trouble ticket?', 'A trouble ticket is a record of a customer reported problem or issue that needs to be addressed by technical support staff.');
+INSERT INTO Faq (id, title, description) VALUES (2, 'How do I submit a trouble ticket?', 'You can submit a trouble ticket by filling out the ticket submission form.');
+INSERT INTO Faq (id, title, description) VALUES (3, 'How long will it take for my ticket to be resolved?', 'The time it takes to resolve a ticket depends on the complexity of the issue and the volume of tickets currently being handled by our support team. We strive to resolve all tickets as quickly as possible, and we will keep you updated on the progress of your ticket throughout the process.');
+INSERT INTO Faq (id, title, description) VALUES (4, 'Can I track the status of my ticket?', 'Yes, you can track the status of your ticket by checking the status of your ticket in the respective ticket page.');
+INSERT INTO Faq (id, title, description) VALUES (5, 'What information should I include in my trouble ticket?', 'To help us quickly and accurately diagnose and resolve your issue, please include as much detail as possible in your ticket submission. This may include a description of the issue, any error messages or screenshots, and any steps you have already taken to try to resolve the issue.');
+INSERT INTO Faq (id, title, description) VALUES (6, 'How do I cancel a ticket?', 'You can cancel a ticket by navigating to the ticket in question.');
+INSERT INTO Faq (id, title, description) VALUES (7, 'What types of issues can I submit a trouble ticket for?', 'You can submit a trouble ticket for any technical issue or problem that you are experiencing with a product or service.');
