@@ -4,7 +4,6 @@
   require_once(__DIR__ . '/../templates/footer.tpl.php');
 
   function drawAboutUs() {
-    // Add your "About us" content here
     echo "<h1>About Our Company</h1>";
     echo "<p>Welcome to HelpDesk, our trouble tickets website. We are a team of experienced professionals who are dedicated to providing the best possible customer support experience for businesses of all sizes. Our mission is to help you resolve your technical issues as quickly and efficiently as possible.</p>";
     

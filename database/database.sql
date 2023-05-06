@@ -28,7 +28,8 @@ CREATE TABLE User (
      password varchar(255) NOT NULL,
      id_department INTEGER DEFAULT NULL,
      is_agent boolean NOT NULL DEFAULT false,
-     is_admin boolean NOT NULL DEFAULT false
+     is_admin boolean NOT NULL DEFAULT false,
+     CONSTRAINT id_departmentFK FOREIGN KEY(id_department) REFERENCES Department(id_department)
  );
 
 CREATE TABLE Task (
@@ -83,6 +84,8 @@ CREATE TABLE Faq (
 
 /*insert into Ticket(title, descriptions) values ("Isto é um ticket", "Isto é um ticket de teste :)");
 insert into Ticket(title, descriptions) values ("Isto também é um ticket", "Isto é um ticket de teste :)");*/
+
+INSERT INTO User (username, firstName, lastName, email, password) VALUES ('johndoe', 'John', 'Doe', 'ola@ola', 'ola');
 
 INSERT INTO Department (id, name) VALUES (1, 'ola');
 INSERT INTO Department (id, name) VALUES (2, 'Department 2');

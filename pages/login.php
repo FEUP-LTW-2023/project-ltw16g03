@@ -1,22 +1,22 @@
 <?php
   declare(strict_types = 1);
-  require_once(__DIR__ . '/../templates/header.tpl.php');
+  require_once(__DIR__ . '/../templates/headernouser.tpl.php');
   require_once(__DIR__ . '/../templates/footer.tpl.php');
 
   drawHeader();
 ?>
 
-  <p>Welcome to your favourite ticket platform. To continue, please login into your</p>
-    <form action="login.php" method="post">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required>
+  <h2>Login</h2>
+    <form action="../actions/action_login.php" method="post">
+      <label for="email">Email:</label>
+      <input type="email" name="email" placeholder="email">
       <br>
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
+      <input type="password" name="password" placeholder="password">
       <br>
       <input type="submit" value="Login">
     </form>
-    <p>Don't have an account? <a href="register.php">Register here</a>.</p>
+    <p>Don't have an account? <a href="/pages/register.php">Register here</a>.</p>
   
 
 <?php

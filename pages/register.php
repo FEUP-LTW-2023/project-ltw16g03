@@ -1,6 +1,6 @@
 <?php
 declare(strict_types = 1);
-require_once(__DIR__ . '/../templates/header.tpl.php');
+require_once(__DIR__ . '/../templates/headernouser.tpl.php');
 require_once(__DIR__ . '/../templates/footer.tpl.php');
 
 drawHeader();
@@ -25,7 +25,7 @@ drawHeader();
       <br>
       <input type="submit" value="Register">
     </form>
-    <p>Already have an account? <a href="login.php">Login here</a>.</p>
+    <p>Already have an account? <a href="/pages/login.php">Login here</a>.</p>
   
 
 <?php

@@ -265,3 +265,7 @@ body>main>section.tickets>h2>a {
     /* Arredondamento das bordas do botão */
     float: right;
 }
+
+.register-btn {
+    margin-left: 10px;
+}
