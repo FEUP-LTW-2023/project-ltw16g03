@@ -5,7 +5,7 @@
 
   drawHeader();
 ?>
-
+  <section id = "login">
   <h2>Login</h2>
     <form action="../actions/action_login.php" method="post">
       <label for="email">Email:</label>
@@ -17,8 +17,7 @@
       <input type="submit" value="Login">
     </form>
     <p>Don't have an account? <a href="/pages/register.php">Register here</a>.</p>
-  
-
+  </section>
 <?php
   drawFooter();
 ?>
