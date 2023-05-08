@@ -2,6 +2,9 @@
     include_once(__DIR__.'/../includes/init.php');
     require_once(__DIR__ . '/../templates/header.tpl.php');
     require_once(__DIR__ . '/../templates/footer.tpl.php');
+    include_once("../database/user.class.php");
+
+    $_SESSION['userinfo'] = getUser($_SESSION['username']);
     drawHeader();
 ?>
 
@@ -16,7 +19,6 @@
                 <input name="lastName" class="w3-input w3-border" type="text" placeholder="Last Name" value="<?php echo htmlentities($_SESSION['userinfo']['lastName']) ?>" required="required">
                 <label>Username</label>
                 <input name="username" class="w3-input w3-border" type="text" placeholder="Username" value="<?php echo htmlentities($_SESSION['userinfo']['username']) ?>" required="required">
-                <span class="hint">Only lowercase and numbers, at least 6 characters</span>
                 <label>Email</label>
                 <input name="email" class="w3-input w3-border" type="email" placeholder="Email" value="<?php echo htmlentities($_SESSION['userinfo']['email']) ?>" required="required">
                 <label>Password</label>
