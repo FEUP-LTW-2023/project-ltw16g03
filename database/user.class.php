@@ -80,7 +80,7 @@ function isLoginCorrect($username, $password) {
   function getUser($username) {
     global $dbh;
     try {
-      $stmt = $dbh->prepare('SELECT firstName, lastName, username, email FROM User WHERE Username = ?');
+      $stmt = $dbh->prepare('SELECT firstName, lastName, username, email, id_department, is_agent, is_admin FROM User WHERE Username = ?');
       $stmt->execute(array($username));
       return $stmt->fetch();
     

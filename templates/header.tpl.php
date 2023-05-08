@@ -20,8 +20,8 @@
         <header>
             <h1><a href = "/pages/ticketpage.php">HelpDesk</a></h1>
             <section class="logout-edit">
-                <a href="/pages/logout.php"><button id="logout">Logout</button></a>
-                <a href="/pages/edit_profile.php"><button id="logout">Edit Profile</button></a>
+                <a href="../actions/action_logout.php"><button id="logout">Logout</button></a>
+                <a href="/pages/profile.php"><button id="logout">Profile</button></a>
             </section>
             <nav>
             <ul>

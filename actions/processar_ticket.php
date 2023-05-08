@@ -10,10 +10,8 @@
   $ticket_id = Ticket::create($dbh, $_POST['department'], $_POST['name'], $_POST['description']);
 
   if ($ticket_id) {
-    $session->addMessage('success', 'Ticket successful!');
     header("Location: ../pages/ticketpage.php?id=$ticket_id");
   } else {
-    $session->addMessage('error', 'Wrong password!');
     header('Location: ../ticketpage.php');
   }
 
