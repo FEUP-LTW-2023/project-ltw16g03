@@ -1,8 +1,6 @@
 <?php
-  declare(strict_types = 1);
 
-  require_once(__DIR__ . '/../utils/session.php');
-  $session = new Session();
+  require_once(__DIR__ . '/../utils/init.php');
 
   require_once(__DIR__ . '/../database/connection.db.php');
 
@@ -12,11 +10,10 @@
   require_once(__DIR__ . '/../templates/footer.tpl.php');
   require_once(__DIR__ . '/../templates/department.tpl.php');
 
-  $db = getDatabaseConnection();
 
-  $departments = Department::getDepartments($db, 8);
+  $departments = Department::getDepartments($dbh, 8);
 
-  drawHeader($session);
+  drawHeader();
   drawDepartments($departments);
   drawFooter();
 ?>

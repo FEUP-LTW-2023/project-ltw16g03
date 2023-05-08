@@ -85,9 +85,9 @@ CREATE TABLE Faq (
 /*insert into Ticket(title, descriptions) values ("Isto é um ticket", "Isto é um ticket de teste :)");
 insert into Ticket(title, descriptions) values ("Isto também é um ticket", "Isto é um ticket de teste :)");*/
 
-INSERT INTO User (username, firstName, lastName, email, password) VALUES ('johndoe', 'John', 'Doe', 'ola@ola', 'ola');
+INSERT INTO User (username, firstName, lastName, email, password) VALUES ('rafa', 'John', 'Doe', 'ola@ola', 'cd882b791d2f3999d17672bfe317683d0989890e5f96b4d4d6df3f4597e03d2d'); /*Pass*word1*/
 
-INSERT INTO Department (id, name) VALUES (1, 'ola');
+INSERT INTO Department (id, name) VALUES (1, 'oooooeeeee');
 INSERT INTO Department (id, name) VALUES (2, 'Department 2');
 INSERT INTO Department (id, name) VALUES (3, 'Department 3');
 INSERT INTO Department (id, name) VALUES (4, 'Department 4');

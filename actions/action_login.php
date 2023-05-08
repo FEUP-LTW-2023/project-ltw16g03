@@ -1,26 +1,15 @@
 <?php
-  declare(strict_types = 1);
+include_once("../utils/init.php");
+include_once("../database/user.class.php");
 
-  require_once(__DIR__ . '/../utils/session.php');
-  $session = new Session();
+if(($id = isLoginCorrect($_POST['username'], $_POST['password'])) != -1){
 
-  require_once(__DIR__ . '/../database/connection.db.php');
-  require_once(__DIR__ . '/../database/user.class.php');
+	setCurrentUser($id, $_POST['username']);
+	header("Location:../pages/faq.php");
 
-  $db = getDatabaseConnection();
-
-  $user = User::getUserWithPassword($db, $_POST['email'], $_POST['password']);
-
-  if ($user) {
-    $session->setId($user->id);
-    $session->setName($user->name());
-    $session->addMessage('success', 'Login successful!');
-    header('Location: ../pages/aboutus.php');
-    exit;
-  } else {
-    $session->addMessage('error', 'Wrong password!');
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
-    exit;
-  }
+} else {
+	$_SESSION['ERROR'] = 'Incorrect username or password';
+	header("Location:".$_SERVER['HTTP_REFERER']."");
+}
 
 ?>

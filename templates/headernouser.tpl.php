@@ -1,7 +1,7 @@
 <?php 
   declare(strict_types = 1); 
 
-  require_once(__DIR__ . '/../utils/session.php');
+  require_once(__DIR__ . '/../utils/init.php');
 ?>
 
 <?php function drawHeader() { ?>
@@ -18,7 +18,7 @@
     </head>
     <body>
         <header>
-            <h1>HelpDesk</h1>
+            <h1><a href = "/pages/index.php">HelpDesk</a></h1>
         </header>
         <main>
 <?php } ?>
