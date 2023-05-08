@@ -115,5 +115,19 @@
       $id = $stmt->fetch();
       return intval($id['id']);
     }
+
+    static function getTicketsByHashtag(PDO $db, string $hashtag) : array {
+      $stmt = $db->prepare('SELECT t.id, t.title, t.descriptions, t.ticket_status, t.created_at, t.updated_at, t.id_user, t.id_agent, t.id_department
+                            FROM Ticket AS t
+                            INNER JOIN Ticket_Hashtag AS th ON t.id = th.id_ticket
+                            INNER JOIN Hashtag AS h ON th.id_hashtag = h.id
+                            WHERE h.tag = ?');
+      $stmt->execute(array($hashtag));
+    
+      $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+      return $tickets;
+  }
+  
   }
 ?>

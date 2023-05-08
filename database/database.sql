@@ -105,3 +105,14 @@ INSERT INTO Faq (id, title, description) VALUES (4, 'Can I track the status of m
 INSERT INTO Faq (id, title, description) VALUES (5, 'What information should I include in my trouble ticket?', 'To help us quickly and accurately diagnose and resolve your issue, please include as much detail as possible in your ticket submission. This may include a description of the issue, any error messages or screenshots, and any steps you have already taken to try to resolve the issue.');
 INSERT INTO Faq (id, title, description) VALUES (6, 'How do I cancel a ticket?', 'You can cancel a ticket by navigating to the ticket in question.');
 INSERT INTO Faq (id, title, description) VALUES (7, 'What types of issues can I submit a trouble ticket for?', 'You can submit a trouble ticket for any technical issue or problem that you are experiencing with a product or service.');
+
+INSERT INTO Hashtag (tag) VALUES ('sports');
+INSERT INTO Hashtag (tag) VALUES ('politics');
+INSERT INTO Hashtag (tag) VALUES ('news');
+INSERT INTO Hashtag (tag) VALUES ('economy');
+INSERT INTO Hashtag (tag) VALUES ('hashtag5');
+INSERT INTO Hashtag (tag) VALUES ('hashtag6');
+INSERT INTO Hashtag (tag) VALUES ('hashtag7');
+INSERT INTO Hashtag (tag) VALUES ('hashtag8');
+INSERT INTO Hashtag (tag) VALUES ('hashtag9');
+INSERT INTO Hashtag (tag) VALUES ('hashtag10');

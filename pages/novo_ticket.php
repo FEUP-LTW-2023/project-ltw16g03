@@ -21,6 +21,13 @@ drawHeader();
           <option value=<?=$departments[$i]['id']?>> <?=$departments[$i]['name']?></option>
     <?php } ?> 
   </select>
+  <label for="hashtags">Hashtags:</label>
+  <?php
+  require_once(__DIR__ . '/../actions/getAll_hashtags.php');
+  for($i = 0; $i < count($hashtags); $i++) {
+    ?>
+        <input type="checkbox" name="hashtag" value=<?=$hashtags[$i]['id']?>> <?=$hashtags[$i]['tag']?>
+  <?php } ?> 
     <label for="descricao">Descrição:</label>
     <textarea id="description" name="description" required></textarea>
     <input type="submit" value="Enviar">

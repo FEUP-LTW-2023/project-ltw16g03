@@ -12,7 +12,7 @@
   <section id="departments">
     <?php foreach($departments as $department) { ?> 
       <article>
-        <img src="https://picsum.photos/200?<?=$department->id?>">
+        <img src="https://picsum.photos/id/1/200/300?<?=$department->id?>">
         <a href="../pages/department.php?id=<?=$department->id?>"><?=$department->name?></a>
       </article>
     <?php } ?>
@@ -24,7 +24,7 @@
   <section id="tickets">
     <?php foreach ($tickets as $ticket) { ?>
     <article>
-      <img src="https://picsum.photos/200?<?=$ticket->id?>">
+      <img src="https://picsum.photos/id/1/200/300?<?=$ticket->id?>">
       <a href="../pages/album.php?id=<?=$ticket->id?>"><?=$ticket->title?></a>
       <p class="info">This ticket is <?=$ticket->ticket_status?></p>
     </article>
