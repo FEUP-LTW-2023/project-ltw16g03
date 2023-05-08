@@ -119,3 +119,35 @@ function updateUserInfo($id, $firstName, $lastName, $username, $email){
       return false;
     }
   }
+
+  function isAgent($username) {
+    global $dbh;
+    try {
+      $stmt = $dbh->prepare('SELECT is_agent FROM User WHERE username = ?');
+      $stmt->execute(array($username));
+      $result = $stmt->fetch();
+      if ($result !== false && $result['is_agent'] == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch(PDOException $e) {
+      return false;
+    }
+  }
+  
+  function isAdmin($username) {
+    global $dbh;
+    try {
+      $stmt = $dbh->prepare('SELECT is_admin FROM User WHERE username = ?');
+      $stmt->execute(array($username));
+      $result = $stmt->fetch();
+      if ($result !== false && $result['is_admin'] == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch(PDOException $e) {
+      return false;
+    }
+  }
