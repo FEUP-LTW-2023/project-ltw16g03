@@ -76,3 +76,46 @@ function isLoginCorrect($username, $password) {
       return true;
     }
   }
+
+  function getUser($username) {
+    global $dbh;
+    try {
+      $stmt = $dbh->prepare('SELECT firstName, lastName, username, email FROM User WHERE Username = ?');
+      $stmt->execute(array($username));
+      return $stmt->fetch();
+    
+    }catch(PDOException $e) {
+      return null;
+    }
+  }
+
+function updateUserInfo($id, $firstName, $lastName, $username, $email){
+    global $dbh;
+
+    try {
+      $stmt = $dbh->prepare('UPDATE User SET firstName = ?, lastName = ?, username = ?, email = ? WHERE id = ?');
+      if($stmt->execute(array($firstName, $lastName, $username, $email, $id)))
+          return true;
+      else{
+        return false;
+      }   
+    }catch(PDOException $e) {
+      return false;
+    }
+  }
+
+  function updateUserPassword($id, $newpassword){
+    $passwordhashed = hash('sha256', $newpassword);
+    global $dbh;
+
+    try {
+      $stmt = $dbh->prepare('UPDATE User SET password = ? WHERE id = ?');
+      if($stmt->execute(array($passwordhashed, $id)))
+          return true;
+      else{
+        return false;
+      }   
+    }catch(PDOException $e) {
+      return false;
+    }
+  }
