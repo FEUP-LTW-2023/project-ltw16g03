@@ -12,15 +12,14 @@ drawHeader();
         <label for="nome">Nome:</label>
         <input type="text" id="name" name="name" required>
         <label for="departments">Choose a department:</label>
-        <select name="department" id="department" required>
-        <option value = "none"> </option>
-        <option value="sports">Sports</option>
-        <option value="politics">Politics</option>
-        <option value="future">Future</option>
-        <option value="technology">Technology</option>
-        <option value="other">Other</option>
-
-
+    <select name="department" id="department" required>
+    <option value = "none"> </option>
+    <?php
+    require_once(__DIR__ . '/../actions/getAll_departments.php');
+    for($i = 0; $i < count($departments); $i++) {
+      ?>
+          <option value=<?=$departments[$i]['id']?>> <?=$departments[$i]['name']?></option>
+    <?php } ?> 
   </select>
     <label for="descricao">Descrição:</label>
     <textarea id="description" name="description" required></textarea>

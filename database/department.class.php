@@ -26,6 +26,18 @@
       return $departments;
     }
 
+    static function getAll(PDO $db){
+      $stmt = $db->prepare('
+        SELECT id, name
+        FROM Department
+        ORDER by created_at desc
+      ');
+
+      $stmt->execute();
+      $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $row;
+    }
+
     static function searchDepartments(PDO $db, string $search, int $count) : array {
       $stmt = $db->prepare('SELECT id, name FROM Department WHERE name LIKE ? LIMIT ?');
       $stmt->execute(array($search . '%', $count));
