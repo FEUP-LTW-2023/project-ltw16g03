@@ -29,7 +29,7 @@ CREATE TABLE User (
      id_department INTEGER DEFAULT NULL,
      is_agent boolean NOT NULL DEFAULT false,
      is_admin boolean NOT NULL DEFAULT false,
-     CONSTRAINT id_departmentFK FOREIGN KEY(id_department) REFERENCES Department(id_department)
+     CONSTRAINT id_departmentFK FOREIGN KEY(id_department) REFERENCES Department(id)
  );
 
 CREATE TABLE Task (
@@ -38,7 +38,7 @@ CREATE TABLE Task (
     description TEXT NOT NULL,
     is_completed BOOLEAN NOT NULL DEFAULT False,
     id_user INTEGER,
-    CONSTRAINT id_userFK FOREIGN KEY(id_user) REFERENCES User(id_user) ON DELETE CASCADE
+    CONSTRAINT id_userFK FOREIGN KEY(id_user) REFERENCES User(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Department (
@@ -58,8 +58,8 @@ CREATE TABLE Ticket (
     id_agent INTEGER, /* id do agent que está a tratar do ticket */
     id_department INTEGER, /* id do department do ticket */
     CONSTRAINT current_edit_date_ck CHECK (created_at <= updated_at),
-    CONSTRAINT id_usertFK FOREIGN KEY(id_user) REFERENCES User(id_user),
-    CONSTRAINT id_agentFK FOREIGN KEY(id_agent) REFERENCES User(id_user),
+    CONSTRAINT id_usertFK FOREIGN KEY(id_user) REFERENCES User(id),
+    CONSTRAINT id_agentFK FOREIGN KEY(id_agent) REFERENCES User(id),
     CONSTRAINT id_departmentFK FOREIGN KEY(id_department) REFERENCES Department(id)
 );
 
