@@ -53,20 +53,21 @@
         $department['name']
       );
     }  
+  }
 
-    static function addDepartment(PDO $db, string $name): bool {
-      try {
-        $stmt = $db->prepare('INSERT INTO Department (name) VALUES (?)');
-        $stmt->execute([$name]);
-    
-        if ($stmt->rowCount() > 0) {
-          return true; 
-        } else {
-          return false; 
-        }
-      } catch(PDOException $e) {
-        return false; 
+   function addDepartment(PDO $db, string $name): bool {
+    try {
+      $stmt = $db->prepare('INSERT INTO Department (name) VALUES (?)');
+      $stmt->execute([$name]);
+  
+      
+      if ($stmt->rowCount() > 0) {
+        return true; 
+      } else {
+        return false;
       }
+    } catch(PDOException $e) {
+      return false; 
     }
   }
   
