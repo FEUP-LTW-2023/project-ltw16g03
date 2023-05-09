@@ -94,7 +94,7 @@
       $stmt->execute(array($id));
     }
 
-    static function create(PDO $db, int $id_department, string $title, string $description, int $id_user) : int {
+    static function create(PDO $db, string $id_department, string $title, string $description, int $id_user) : int {
 
       $sql = "INSERT INTO Ticket (title, description, id_department, id_user) VALUES (:title, :description, :id_department, :id_user)";
       $stmt= $db->prepare($sql);
