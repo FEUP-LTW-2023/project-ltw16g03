@@ -13,7 +13,7 @@
     <?php foreach($departments as $department) { ?> 
       <article>
         <img src="https://picsum.photos/id/1/200/300?<?=$department->id?>">
-        <a href="../pages/department.php?id=<?=$department->id?>"><?=$department->name?></a>
+        <a href="../pages/departmentTicket.php?id=<?=$department->id?>"><?=$department->name?></a>
       </article>
     <?php } ?>
   </section>
@@ -22,11 +22,15 @@
 <?php function drawDepartment(Department $department, array $tickets) { ?>
   <h2><?=$department->name?></h2>
   <section id="tickets">
-    <?php foreach ($tickets as $ticket) { ?>
+    <?php foreach ($tickets as $ticket) { 
+      $id_t = $ticket['id'];
+      $title_t = $ticket['title'];
+      $description_t = $ticket['description'];
+    ?>
     <article>
-      <img src="https://picsum.photos/id/1/200/300?<?=$ticket->id?>">
-      <a href="../pages/album.php?id=<?=$ticket->id?>"><?=$ticket->title?></a>
-      <p class="info">This ticket is <?=$ticket->ticket_status?></p>
+      <?=$ticket->id?>
+      <a href="../pages/ticketpage.php?id=<?=$id_t?>"><?=$title_t?></a>
+      <p class="info"> Description of the ticket: <?=$description_t?></p>
     </article>
     <?php } ?>
   </section>

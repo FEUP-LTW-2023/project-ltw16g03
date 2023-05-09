@@ -84,6 +84,19 @@
       return $row;
     }
 
+    static function getTicketsbyDepartment(PDO $db, int $id_department) {
+      $stmt = $db->prepare('
+        SELECT id, title, description
+        FROM Ticket 
+        WHERE id_department = ?
+        ORDER by updated_at desc
+      ');
+
+      $stmt->execute(array($id_department));
+      $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $row;
+    }
+
     static function delete(PDO $db, int $id) {
       $stmt = $db->prepare('
         DELETE 
