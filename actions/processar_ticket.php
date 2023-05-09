@@ -7,7 +7,7 @@
   require_once(__DIR__ . '/../database/ticket.class.php');
 
 
-  $ticket_id = Ticket::create($dbh, $_POST['department'], $_POST['name'], $_POST['description'], getUserID());
+  $ticket_id = Ticket::create($dbh, $_POST['department'], $_POST['name'], $_POST['description'], intval(getUserID()));
 
   if ($ticket_id) {
     header("Location: ../pages/ticketpage.php?id=$ticket_id");

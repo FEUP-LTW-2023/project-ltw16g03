@@ -18,7 +18,7 @@
       $departments = array();
       while ($department = $stmt->fetch()) {
         $departments[] = new Department(
-          $department['id'],
+          intval($department['id']),
           $department['name']
         );
       }
@@ -45,14 +45,13 @@
       $departments = array();
       while ($department = $stmt->fetch()) {
         $departments[] = new Department(
-          $department['id'],
+          intval($department['id']),
           $department['name']
         );
       }
   
       return $departments;
     }
-
 
     static function getDepartment(PDO $db, int $id) : Department {
       $stmt = $db->prepare('SELECT id, name FROM Department WHERE id = ?');
