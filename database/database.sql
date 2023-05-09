@@ -27,8 +27,8 @@ CREATE TABLE User (
      email varchar(255) NOT NULL UNIQUE,
      password varchar(255) NOT NULL,
      id_department INTEGER DEFAULT NULL,
-     is_agent boolean NOT NULL DEFAULT false,
-     is_admin boolean NOT NULL DEFAULT false,
+     is_agent BOOLEAN NOT NULL DEFAULT false,
+     is_admin BOOLEAN NOT NULL DEFAULT false,
      CONSTRAINT id_departmentFK FOREIGN KEY(id_department) REFERENCES Department(id)
  );
 
@@ -50,12 +50,12 @@ CREATE TABLE Department (
 CREATE TABLE Ticket (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title varchar(255) NOT NULL UNIQUE,
-    descriptions VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
     ticket_status VARCHAR (10)  NOT NULL DEFAULT 'Open' CHECK (ticket_status IN ('Open', 'Assigned', 'Resolved', 'Closed')),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     id_user INTEGER, /* id do client que criou o ticket */
-    id_agent INTEGER, /* id do agent que está a tratar do ticket */
+    id_agent INTEGER DEFAULT NULL, /* id do agent que está a tratar do ticket */
     id_department INTEGER, /* id do department do ticket */
     CONSTRAINT current_edit_date_ck CHECK (created_at <= updated_at),
     CONSTRAINT id_usertFK FOREIGN KEY(id_user) REFERENCES User(id),
@@ -82,10 +82,11 @@ CREATE TABLE Faq (
     description text NOT NULL
 );
 
-/*insert into Ticket(title, descriptions) values ("Isto é um ticket", "Isto é um ticket de teste :)");
-insert into Ticket(title, descriptions) values ("Isto também é um ticket", "Isto é um ticket de teste :)");*/
+insert into Ticket(title, description, id_user, id_department) values ("Isto é um ticket", "Isto é um ticket de teste :)", 1, 2);
+insert into Ticket(title, description, id_user, id_department) values ("Isto também é um ticket", "Isto é um ticket de teste :)", 2, 3);
 
-INSERT INTO User (username, firstName, lastName, email, password) VALUES ('rafa', 'John', 'Doe', 'ola@ola', 'cd882b791d2f3999d17672bfe317683d0989890e5f96b4d4d6df3f4597e03d2d'); /*Pass*word1*/
+INSERT INTO User (id, username, firstName, lastName, email, password, is_agent) VALUES (1, 'rafa', 'John', 'Doe', 'ola@ola', 'cd882b791d2f3999d17672bfe317683d0989890e5f96b4d4d6df3f4597e03d2d', true); /*Pass*word1*/
+INSERT INTO User (id, username, firstName, lastName, email, password, is_agent) VALUES (2, 'ze', 'ze', 'ze', 'o@o', 'cd882b791d2f3999d17672bfe317683d0989890e5f96b4d4d6df3f4597e03d2d', false); /*Pass*word1*/
 
 INSERT INTO Department (id, name) VALUES (1, 'oooooeeeee');
 INSERT INTO Department (id, name) VALUES (2, 'Department 2');

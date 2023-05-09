@@ -10,7 +10,7 @@ if (searchDepartment) {
     for (const department of departments) {
       const article = document.createElement('article')
       const img = document.createElement('img')
-      img.src = 'https://picsum.photos/200?' + department.id
+      img.src = 'https://picsum.photos/id/1/200/300?' + department.id
       const link = document.createElement('a')
       link.href = '../pages/department.php?id=' + department.id
       link.textContent = department.name

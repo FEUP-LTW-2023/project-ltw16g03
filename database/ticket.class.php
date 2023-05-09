@@ -4,21 +4,25 @@
   class Ticket {
     public int $id;
     public string $title;
-    public string $descriptions;
-    public int $ticket_status;
+    public string $description;
+    public string $ticket_status;
     public datetime $created_at;
     public datetime $updated_at;
-    public string $id_department;
+    public int $id_user;
+    public int $id_agent;
+    public int $id_department;
     
-    public function __construct(int $id, string $id_department, string $title, string $descriptions, string $ticket_status, datetime $created_at, datetime $updated_at)
+    public function __construct(int $id, string $title, string $description, string $ticket_status, datetime $created_at, datetime $updated_at, int $id_user, int $id_agent, int $id_department)
     {
         $this->id = $id;
-        $this->id_department = $id_department;
         $this->title = $title;
-        $this->descriptions = $descriptions;
+        $this->description = $description;
         $this->ticket_status = $ticket_status;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
+        $this->id_user = $id_user;
+        $this->id_agent = $id_agent;
+        $this->id_department = $id_department;
     }
 
     function edit($db) {
@@ -27,13 +31,14 @@
         WHERE id = ?
       ');
 
-      $stmt->execute(array($this->id_department, $this->title, $this->descriptions, $this->ticket_status, $this->updated_at, $this->id));
+      $stmt->execute(array($this->id_department, $this->title, $this->description, $this->ticket_status, $this->updated_at, $this->id));
     }
     
     
-    static function get(PDO $db, int $id) : Ticket {
-      $stmt = $db->prepare('
-        SELECT id, id_department, title, description, ticket_status, created_at, updated_at, user_id
+    static function get(int $id) : Ticket {
+      global $dbh;
+      $stmt = $dbh->prepare('
+        SELECT id, title, description, ticket_status, created_at, updated_at, id_user, id_agent, id_department
         FROM Ticket 
         WHERE id = ?
       ');
@@ -43,21 +48,22 @@
       
       return new Ticket(
         $ticket['id'],
-        $ticket['id_department'],
         $ticket['title'],
         $ticket['description'],
         $ticket['ticket_status'],
         $ticket['created_at'],
         $ticket['udpated_at'],
-        $ticket['user_id'],
+        $ticket['id_user'],
+        $ticket['id_agent'],
+        $ticket['id_department']
       );
     }
 
     static function getAll(PDO $db){
       $stmt = $db->prepare('
-        SELECT id, title, descriptions, id_department
+        SELECT id, title, description, id_department
         FROM Ticket 
-        ORDER by created_at desc
+        ORDER by updated_at desc
       ');
 
       $stmt->execute();
@@ -65,26 +71,17 @@
       return $row;
     }
 
-    static function getTicketsbyUser(PDO $db, int $user_id) : Ticket {
+    static function getTicketsbyUser(PDO $db, int $id_user){
       $stmt = $db->prepare('
-        SELECT id, id_department, title, description, ticket_status, created_at, updated_at, user_id
+        SELECT id, title, description, id_department
         FROM Ticket 
-        WHERE user_id = ?
+        WHERE id_user = ?
+        ORDER by updated_at desc
       ');
 
-      $stmt->execute(array($user_id));
-      $ticket = $stmt->fetch();
-      
-      return new Ticket(
-        $ticket['id'],
-        $ticket['id_department'],
-        $ticket['title'],
-        $ticket['description'],
-        $ticket['ticket_status'],
-        $ticket['created_at'],
-        $ticket['udpated_at'],
-        $ticket['user_id'],
-      );
+      $stmt->execute(array($id_user));
+      $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $row;
     }
 
     static function delete(PDO $db, int $id) {
@@ -97,13 +94,14 @@
       $stmt->execute(array($id));
     }
 
-    static function create(PDO $db, string $id_department, string $title, string $descriptions) : int {
+    static function create(PDO $db, int $id_department, string $title, string $description, int $id_user) : int {
 
-      $sql = "INSERT INTO Ticket (title, descriptions, id_department) VALUES (:title, :descriptions, :id_department)";
+      $sql = "INSERT INTO Ticket (title, description, id_department, id_user) VALUES (:title, :description, :id_department, :id_user)";
       $stmt= $db->prepare($sql);
       $stmt->bindValue('title', $title, PDO::PARAM_STR);
-      $stmt->bindValue('descriptions', $descriptions, PDO::PARAM_STR);
+      $stmt->bindValue('description', $description, PDO::PARAM_STR);
       $stmt->bindValue('id_department', $id_department, PDO::PARAM_INT);
+      $stmt->bindValue('id_user', $id_user, PDO::PARAM_INT);
       $stmt->execute();
       
       //checkar nome ticket sempre diferente
