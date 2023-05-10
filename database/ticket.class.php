@@ -127,6 +127,18 @@
       return intval($id['id']);
     }
 
+    static function getTicket(int $id) {
+      global $dbh;
+    try {
+      $stmt = $dbh->prepare('SELECT id, title, description, ticket_status, id_department, id_user FROM Ticket WHERE id = ?');
+      $stmt->execute(array($id));
+      return $stmt->fetch();
+    
+    }catch(PDOException $e) {
+      return null;
+    }
+    }  
+
     static function getTicketsByHashtag(PDO $db, string $hashtag) : array {
       $stmt = $db->prepare('SELECT t.id, t.title, t.descriptions, t.ticket_status, t.created_at, t.updated_at, t.id_user, t.id_agent, t.id_department
                             FROM Ticket AS t

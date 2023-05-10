@@ -120,11 +120,11 @@ function updateUserInfo($id, $firstName, $lastName, $username, $email){
     }
   }
 
-  function isAgent($username) {
+  function isAgent($id) {
     global $dbh;
     try {
-      $stmt = $dbh->prepare('SELECT is_agent FROM User WHERE username = ?');
-      $stmt->execute(array($username));
+      $stmt = $dbh->prepare('SELECT is_agent FROM User WHERE id = ?');
+      $stmt->execute(array($id));
       $result = $stmt->fetch();
       if ($result !== false && $result['is_agent'] == true) {
         return true;
@@ -136,11 +136,11 @@ function updateUserInfo($id, $firstName, $lastName, $username, $email){
     }
   }
   
-  function isAdmin($username) {
+  function isAdmin($id) {
     global $dbh;
     try {
-      $stmt = $dbh->prepare('SELECT is_admin FROM User WHERE username = ?');
-      $stmt->execute(array($username));
+      $stmt = $dbh->prepare('SELECT is_admin FROM User WHERE id = ?');
+      $stmt->execute(array($id));
       $result = $stmt->fetch();
       if ($result !== false && $result['is_admin'] == true) {
         return true;

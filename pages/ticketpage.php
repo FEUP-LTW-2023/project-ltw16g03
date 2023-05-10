@@ -5,21 +5,8 @@
 
   drawHeader();
 ?>
-
-  <!--<section class="newticket">
-    <div class="ticket-form">
-      <h2>Criar Novo Ticket</h2>
-        <form action="../actions/processar_ticket.php" method="post">  Ação e método do formulário, a ser processado no servidor
-          <label for="nome">Nome:</label>
-          <input type="text" id="nome" name="nome" required>
-          <label for="descricao">Descrição:</label>
-          <textarea id="descricao" name="descricao" required></textarea>
-          <input type="submit" value="Enviar">
-        </form>
-      </div>
-  </section>-->
   <section class="tickets">
-      <h2>Tickets Abertos 
+      <h2>My Tickets 
         <a href="novo_ticket.php" class="button">Criar Novo Ticket</a>
       </h2> 
 
@@ -27,7 +14,7 @@
         <?php  
         require_once(__DIR__ . '/../actions/getUser_tickets.php');
         if(count($tickets) == 0){
-          echo "<h3>Não há tickets abertos</h3>";
+          echo "<h3>No tickets from this user</h3>";
         }
 
         for($i = 0; $i < count($tickets); $i++) { 
@@ -37,7 +24,7 @@
             <h3> <?=$tickets[$i]['title']?></h3>
             <p> <?=$tickets[$i]['description']?> </p>
             <p> <?=$tickets[$i]['id_department']?> </p>
-            <a href="" class="button">Detalhes</a>
+            <a href="../pages/detailTicket.php?id=<?=$tickets[$i]['id']?>" class="button">Detalhes</a>
           </div>
         </li>
         <?php } ?>   

@@ -22,7 +22,12 @@
 <?php function drawDepartment(Department $department, array $tickets) { ?>
   <h2><?=$department->name?></h2>
   <section id="tickets">
-    <?php foreach ($tickets as $ticket) { 
+    <?php 
+    if(count($tickets) == 0){
+      echo "<h3>No tickets from this Department</h3>";
+    }
+    
+    foreach ($tickets as $ticket) { 
       $id_t = $ticket['id'];
       $title_t = $ticket['title'];
       $description_t = $ticket['description'];
