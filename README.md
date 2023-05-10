@@ -1,1 +1,4 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10534440&assignment_repo_type=AssignmentRepo)
+# Project LTW - ltw16g03
+Projects for the Web Languages and Technologies (LTW) class to develop a website to streamline and manage trouble tickets effectively.
+
+Made by [Rafael Alves](https://github.com/rafazalves), [José Guedes](https://github.com/zenguedes) and [Manuel Alves](https://github.com/manuelcralves).<br>
