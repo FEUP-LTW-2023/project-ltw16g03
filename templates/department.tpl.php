@@ -27,11 +27,11 @@
       $title_t = $ticket['title'];
       $description_t = $ticket['description'];
     ?>
-    <article>
-      <?=$ticket->id?>
-      <a href="../pages/ticketpage.php?id=<?=$id_t?>"><?=$title_t?></a>
-      <p class="info"> Description of the ticket: <?=$description_t?></p>
-    </article>
+    <div class="ticket" id="<?=$id_t?>">
+      <h3> <?=$title_t?></h3>
+      <p> <?=$description_t?> </p>
+      <a href="" class="button">Detalhes</a>
+    </div>
     <?php } ?>
   </section>
 <?php } ?>
