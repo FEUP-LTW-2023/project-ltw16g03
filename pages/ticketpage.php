@@ -23,7 +23,6 @@
           <div class="ticket" id="<?=$tickets[$i]['id']?>">
             <h3> <?=$tickets[$i]['title']?></h3>
             <p> <?=$tickets[$i]['description']?> </p>
-            <p> <?=$tickets[$i]['id_department']?> </p>
             <a href="../pages/detailTicket.php?id=<?=$tickets[$i]['id']?>" class="button">Detalhes</a>
           </div>
         </li>
