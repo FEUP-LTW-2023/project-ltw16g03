@@ -9,8 +9,8 @@ drawHeader();
   <div class="ticket-form">
     <h2>Create new ticket</h2>
       <form action="/actions/processar_ticket.php" method="post"> <!-- Ação e método do formulário, a ser processado no servidor -->
-        <label for="nome">Nome:</label>
-        <input type="text" id="name" name="name" required>
+        <label for="nome">Title:</label>
+        <input type="text" id="title" name="title" required>
         <label for="departments">Choose a department:</label>
     <select name="department" id="department" required>
     <?php

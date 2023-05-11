@@ -7,7 +7,7 @@
 ?>
   <section class="tickets">
       <h2>My Tickets 
-        <a href="novo_ticket.php" class="button">Criar Novo Ticket</a>
+        <a href="novo_ticket.php" class="button">Create new Ticket</a>
       </h2> 
 
       <ul>

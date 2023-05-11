@@ -10,6 +10,7 @@
     <?php 
     require_once(__DIR__ . '/../database/user.class.php');
     $isADMIN = isAdmin(getUserID());
+    $isAGENT = isAgent(getUserID());
     ?>
     <head>
         <title>HelpDesk - Trouble Tickets</title>
@@ -37,6 +38,11 @@
                 if($isADMIN==true){
                 ?>
                 <li><a href="/pages/users.php">Users</a></li>
+                <?php } ?> 
+                <?php
+                if($isADMIN==true && $isAGENT==true){
+                ?>
+                <li><a href="/pages/tasks.php">My Tasks</a></li>
                 <?php } ?> 
             </ul>
             </nav>
