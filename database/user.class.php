@@ -53,6 +53,20 @@ function isLoginCorrect($username, $password) {
     }
   }
 
+  function getUserna($id) {
+    global $dbh;
+    try {
+      $stmt = $dbh->prepare('SELECT username FROM User WHERE id = ?');
+      $stmt->execute(array($id));
+      if($row = $stmt->fetch()){
+        return $row['username'];
+      }
+    
+    }catch(PDOException $e) {
+      return -1;
+    }
+  }
+
   function duplicateUsername($username) {
     global $dbh;
     try {
@@ -175,3 +189,17 @@ function updateUserInfo($id, $firstName, $lastName, $username, $email){
     return null;
   }
   }  
+  function updateUserInfoAdmin($id, $id_department, $is_agent, $is_admin){
+    global $dbh;
+
+    try {
+      $stmt = $dbh->prepare('UPDATE User SET id_department = ?, is_agent = ?, is_admin = ? WHERE id = ?');
+      if($stmt->execute(array($id_department, $is_agent, $is_admin, $id)))
+          return true;
+      else{
+        return false;
+      }   
+    }catch(PDOException $e) {
+      return false;
+    }
+  }

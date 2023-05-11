@@ -18,11 +18,14 @@
         }
 
         for($i = 0; $i < count($tickets); $i++) { 
+        include_once("../database/department.class.php");
+        $depart = Department::getName($tickets[$i]['id_department']);
         ?>
         <li>
           <div class="ticket" id="<?=$tickets[$i]['id']?>">
             <h3> <?=$tickets[$i]['title']?></h3>
             <p> <?=$tickets[$i]['description']?> </p>
+            <p> Department: <?=$depart?> </p>
             <a href="../pages/detailTicket.php?id=<?=$tickets[$i]['id']?>" class="button">Detalhes</a>
           </div>
         </li>

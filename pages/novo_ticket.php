@@ -7,13 +7,12 @@ drawHeader();
 ?>
 
   <div class="ticket-form">
-    <h2>Criar Novo Ticket</h2>
+    <h2>Create new ticket</h2>
       <form action="/actions/processar_ticket.php" method="post"> <!-- Ação e método do formulário, a ser processado no servidor -->
         <label for="nome">Nome:</label>
         <input type="text" id="name" name="name" required>
         <label for="departments">Choose a department:</label>
     <select name="department" id="department" required>
-    <option value = "none"> </option>
     <?php
     require_once(__DIR__ . '/../actions/getAll_departments.php');
     for($i = 0; $i < count($departments); $i++) {

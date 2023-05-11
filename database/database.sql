@@ -113,7 +113,7 @@ INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_depa
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Order status', 'I would like to know the status of my order', 'Open', 10, 3, 5);
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Product question', 'I have a question about your product', 'Closed', 8, 6, 1);
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Order issue', 'There is an issue with my order', 'Open', 10, NULL, 10);
-INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Billing inquiry', 'I have a question about my bill', 'Assigned', 2, 2, 3);
+INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Billing inquiry', 'I have a question about my bill', 'Assigned', 2, 6, 3);
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Product missing', 'My order is missing a product', 'Open', 6, NULL, 4);
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Cancellation request', 'I would like to cancel my order', 'Assigned', 7, 8, 3);
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Feature request', 'I would like to request a new feature', 'Open', 4, NULL, 4);
