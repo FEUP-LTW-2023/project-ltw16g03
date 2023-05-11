@@ -152,5 +152,44 @@
       return $tickets;
   }
   
+  static function updateTicketAgent($ticketId, $agentId) {
+    $userAgent = isAgent(getUserID());
+
+    if ($userAgent) {
+        try {
+            global $dbh;
+
+            // Check if the agent ID exists in the User table
+            $agentExistsStmt = $dbh->prepare('SELECT COUNT(*) FROM User WHERE id = :agentId');
+            $agentExistsStmt->bindParam(':agentId', $agentId, PDO::PARAM_INT);
+            $agentExistsStmt->execute();
+            $agentExists = $agentExistsStmt->fetchColumn();
+
+            if ($agentExists) {
+                // Prepare and execute the update statement
+                $stmt = $dbh->prepare('UPDATE Ticket SET id_agent = :agentId WHERE id = :ticketId');
+                $stmt->bindParam(':agentId', $agentId, PDO::PARAM_INT);
+                $stmt->bindParam(':ticketId', $ticketId, PDO::PARAM_INT);
+                $stmt->execute();
+
+                // Check if the update was successful
+                if ($stmt->rowCount() > 0) {
+                    return true; // Ticket agent updated successfully
+                } else {
+                    return false; // No ticket found with the given ID
+                }
+            } else {
+                return false; // Agent ID does not exist in the User table
+            }
+        } catch (PDOException $e) {
+            echo 'Error updating ticket agent: ' . $e->getMessage();
+            return false; // An error occurred while updating the ticket agent
+        }
+    } else {
+        echo 'Only agents can update ticket agents.';
+        return false; // User is not an agent
+    }
+}
+
   }
 ?>
