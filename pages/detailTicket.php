@@ -42,6 +42,20 @@ if ($ag == null) {
 if ($ag == null && isAgent(getUserID())) {
     echo '<button onclick="assignTicket()">Assign Ticket</button>';
 }
+
+if ($_SESSION['ticketinfo']['id_agent'] == getUserID()) {
+    // Display the dropdown list of departments
+    $departments = Department::getAll($dbh);
+
+    echo '<label>Change ticket department:</label>';
+    echo '<select id="departmentSelect">';
+    foreach ($departments as $department) {
+        echo '<option value="' . $department['id'] . '">' . $department['name'] . '</option>';
+    }
+    echo '</select>';
+    echo '<button onclick=updateDepartment()>Change Department</button>';
+
+}
 ?>
 
 <script>
@@ -63,7 +77,28 @@ if ($ag == null && isAgent(getUserID())) {
         };
         xhr.send('ticketId=<?php echo $_GET['id']; ?>');
     }
+    
+    function updateDepartment() {
+        var departmentId = document.getElementById('departmentSelect').value;
+        var ticketId = <?php echo $_GET['id']; ?>;
+
+        // Call the updateTicketDepartment function via an AJAX request
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../actions/action_update_ticket_department.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = xhr.responseText;
+                window.location.reload(false);
+            }
+        };
+        xhr.send('ticketId=' + ticketId + '&newDepartmentId=' + departmentId);
+    }
+
+    // Attach the event listener to the button
+    document.getElementById('changeDepartmentBtn').addEventListener('click', updateDepartment);
 </script>
+
 
 <?php
 drawFooter();
