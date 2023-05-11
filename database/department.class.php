@@ -64,21 +64,20 @@
         $department['name']
       );
     }  
-  }
 
-   function addDepartment(PDO $db, string $name): bool {
-    try {
-      $stmt = $db->prepare('INSERT INTO Department (name) VALUES (?)');
-      $stmt->execute([$name]);
-  
+    static function create(PDO $db, string $name) : int {
+
+      $sql = "INSERT INTO Department (name) VALUES (:name)";
+      $stmt= $db->prepare($sql);
+      $stmt->bindValue('name', $name, PDO::PARAM_STR);
+      $stmt->execute();
       
-      if ($stmt->rowCount() > 0) {
-        return true; 
-      } else {
-        return false;
-      }
-    } catch(PDOException $e) {
-      return false; 
+      //Return new Department id
+      $sql = "SELECT id from Department ORDER BY ID DESC LIMIT 1";
+      $stmt= $db->prepare($sql);
+      $stmt->execute();
+      $id = $stmt->fetch();
+      return intval($id['id']);
     }
   }
   

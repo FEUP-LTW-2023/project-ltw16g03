@@ -4,9 +4,16 @@
   require_once(__DIR__ . '/../database/department.class.php')
 ?>
 
-<?php function drawdepartments(array $departments) { ?>
+<?php function drawdepartments(array $departments, bool $isADMIN) { ?>
   <header>
-    <h2>Departments</h2>
+    <h2>Departments
+    <?php
+    if($isADMIN==true){
+  ?>
+    <a href="/pages/novo_department.php" class="button">Add Department</a>
+  <?php
+  }?>
+    </h2>
     <input id="searchdepartment" type="text" placeholder="search" onchange> 
   </header>
   <section id="departments">

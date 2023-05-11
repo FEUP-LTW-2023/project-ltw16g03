@@ -28,9 +28,9 @@ drawHeader();
     ?>
         <input type="checkbox" name="hashtag" value=<?=$hashtags[$i]['id']?>> <?=$hashtags[$i]['tag']?>
   <?php } ?> 
-    <label for="descricao">Descrição:</label>
+    <label for="descricao">Description:</label>
     <textarea id="description" name="description" required></textarea>
-    <input type="submit" value="Enviar">
+    <input type="submit" value="Submit">
 
       </form>
   </div>

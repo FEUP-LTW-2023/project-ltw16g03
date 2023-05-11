@@ -1,12 +1,24 @@
 <?php
   declare(strict_types = 1);
+
+  require_once(__DIR__ . '/../utils/init.php');
   require_once(__DIR__ . '/../templates/header.tpl.php');
   require_once(__DIR__ . '/../templates/footer.tpl.php');
+  require_once(__DIR__ . '/../database/user.class.php');
+
+  $isADMIN = isAdmin(getUserID());
+  $isAGENT = isAgent(getUserID());
 
   drawHeader();
 ?>
   <section class="tickets">
-      <h2>Frequently Asked Question (FAQ)</h2> 
+      <h2>Frequently Asked Question (FAQ)
+      <?php
+      if($isADMIN==true || $isAGENT==true){
+      ?>
+      <a href="/pages/nova_faq.php" class="button">Add FAQ</a>
+      <?php } ?> 
+      </h2> 
 
       <ul>
         <?php  
@@ -14,7 +26,6 @@
         if(count($faqs) == 0){
           echo "<h3>No FAQ</h3>";
         }
-
         for($i = 0; $i < count($faqs); $i++) { 
         ?>
         <li>

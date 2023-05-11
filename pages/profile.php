@@ -8,7 +8,7 @@
     drawHeader();
 ?>
 
-<h1>Profile of <?php echo htmlentities($_SESSION['userinfo']['username']) ?></h1> <a href="/pages/edit_profile.php"><button id="edit_profile">Edit Profile</button></a>
+<h1>Profile of <?php echo htmlentities($_SESSION['userinfo']['username']) ?></h1> <a href="/pages/edit_profile.php" class="button">Edit Profile</a>
 
 <label>- First Name:</label>
 <h3><?php echo htmlentities($_SESSION['userinfo']['firstName']) ?></h3>

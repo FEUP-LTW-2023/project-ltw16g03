@@ -9,11 +9,13 @@
   require_once(__DIR__ . '/../templates/header.tpl.php');
   require_once(__DIR__ . '/../templates/footer.tpl.php');
   require_once(__DIR__ . '/../templates/department.tpl.php');
+  require_once(__DIR__ . '/../database/user.class.php');
 
-
+  $isADMIN = isAdmin(getUserID());
+ 
   $departments = Department::getDepartments($dbh, 8);
 
   drawHeader();
-  drawDepartments($departments);
+  drawDepartments($departments, $isADMIN);
   drawFooter();
 ?>

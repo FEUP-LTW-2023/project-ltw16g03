@@ -24,5 +24,21 @@
       $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
       return $row;
     }
+
+    static function create(PDO $db, string $title, string $description) : int {
+
+      $sql = "INSERT INTO Faq (title, description) VALUES (:title, :description)";
+      $stmt= $db->prepare($sql);
+      $stmt->bindValue('title', $title, PDO::PARAM_STR);
+      $stmt->bindValue('description', $description, PDO::PARAM_STR);
+      $stmt->execute();
+      
+      //Return new faq id
+      $sql = "SELECT id from Faq ORDER BY ID DESC LIMIT 1";
+      $stmt= $db->prepare($sql);
+      $stmt->execute();
+      $id = $stmt->fetch();
+      return intval($id['id']);
+    }
   }
 ?>
