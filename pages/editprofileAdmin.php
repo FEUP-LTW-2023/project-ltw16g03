@@ -1,0 +1,32 @@
+<?php
+    include_once(__DIR__.'/../includes/init.php');
+    require_once(__DIR__ . '/../templates/header.tpl.php');
+    require_once(__DIR__ . '/../templates/footer.tpl.php');
+    include_once("../database/user.class.php");
+
+    $_SESSION['userinfo'] = getUserAdmin(intval($_GET['id']));
+    drawHeader();
+?>
+
+<h1>Personal Information</h1>
+<div class="content">
+    <div id="account">
+        <div id="fields">
+            <form action="../actions/action_update_user.php" method="post" class="register_form">
+                <label>First Name</label>
+                <input name="firstName" class="w3-input w3-border" type="text" placeholder="First Name" value="<?php echo htmlentities($_SESSION['userinfo']['firstName']) ?>" required="required">
+                <label>Last Name</label>
+                <input name="lastName" class="w3-input w3-border" type="text" placeholder="Last Name" value="<?php echo htmlentities($_SESSION['userinfo']['lastName']) ?>" required="required">
+                <label>Username</label>
+                <input name="username" class="w3-input w3-border" type="text" placeholder="Username" value="<?php echo htmlentities($_SESSION['userinfo']['username']) ?>" required="required">
+                <label>Email</label>
+                <input name="email" class="w3-input w3-border" type="email" placeholder="Email" value="<?php echo htmlentities($_SESSION['userinfo']['email']) ?>" required="required">                
+                <input type="submit" name="Submit" value="Update">
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php
+    drawFooter();
+?>

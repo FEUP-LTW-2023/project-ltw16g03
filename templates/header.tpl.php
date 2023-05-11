@@ -1,12 +1,16 @@
 <?php 
   declare(strict_types = 1); 
 
-  require_once(__DIR__ . '/../utils/init.php');
+  require_once(__DIR__ . '/../utils/init.php'); 
 ?>
 
 <?php function drawHeader() { ?>
     <!DOCTYPE html>
 <html lang="en-US">
+    <?php 
+    require_once(__DIR__ . '/../database/user.class.php');
+    $isADMIN = isAdmin(getUserID());
+    ?>
     <head>
         <title>HelpDesk - Trouble Tickets</title>
         <link rel="stylesheet" href="../css/ticketpage.css">
@@ -27,9 +31,13 @@
             <ul>
                 <li><a href="/pages/ticketpage.php">My Tickets</a></li>
                 <li><a href="/pages/department.php">Departments</a></li>
-                <li><a href="#">Agents</a></li>
                 <li><a href="/pages/faq.php">FAQ</a></li>
                 <li><a href="/pages/aboutus.php">About us</a></li>
+                <?php
+                if($isADMIN==true){
+                ?>
+                <li><a href="/pages/users.php">Users</a></li>
+                <?php } ?> 
             </ul>
             </nav>
         </header>

@@ -151,3 +151,27 @@ function updateUserInfo($id, $firstName, $lastName, $username, $email){
       return false;
     }
   }
+
+  function getAll(PDO $db){
+    $stmt = $db->prepare('
+      SELECT id, username
+      FROM User 
+      ORDER by username
+    ');
+
+    $stmt->execute();
+    $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $row;
+  }
+
+  function getUserAdmin(int $id) {
+    global $dbh;
+  try {
+    $stmt = $dbh->prepare('SELECT id, username, firstName, lastName, email, id_department, is_agent, is_admin FROM User WHERE id = ?');
+    $stmt->execute(array($id));
+    return $stmt->fetch();
+  
+  }catch(PDOException $e) {
+    return null;
+  }
+  }  

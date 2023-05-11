@@ -79,6 +79,21 @@
       $id = $stmt->fetch();
       return intval($id['id']);
     }
+
+    static function getName($id) {
+      global $dbh;
+      try {
+        $stmt = $dbh->prepare('SELECT name FROM Department WHERE id = ?');
+        $stmt->execute(array($id));
+        if($row = $stmt->fetch()){
+          return $row['name'];
+        }
+      
+      }catch(PDOException $e) {
+        return -1;
+      }
+    }
+
   }
   
 ?>

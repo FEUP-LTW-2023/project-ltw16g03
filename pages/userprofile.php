@@ -1,18 +1,17 @@
 <?php
-    include_once(__DIR__.'/../includes/init.php');
+
     require_once(__DIR__ . '/../templates/header.tpl.php');
     require_once(__DIR__ . '/../templates/footer.tpl.php');
     include_once("../database/user.class.php");
     include_once("../database/department.class.php");
 
-    $_SESSION['userinfo'] = getUser($_SESSION['username']);
-    $isADMIN = isAdmin(getUserID());
-    $isAGENT = isAgent(getUserID());
+    $_SESSION['userinfo'] = getUserAdmin(intval($_GET['id']));
     $depart = Department::getName($_SESSION['userinfo']['id_department']);
+
     drawHeader();
 ?>
 
-<h1>Profile of <?php echo htmlentities($_SESSION['userinfo']['username']) ?> <a href="/pages/edit_profile.php" class="button">Edit Profile</a></h1>
+<h1>Profile of <?php echo htmlentities($_SESSION['userinfo']['username']) ?> <a href="../pages/editprofileAdmin.php?id=<?=$_SESSION['userinfo']['id']?>" class="button">Edit Profile</a></h1>
 
 <label>- First Name:</label>
 <h3><?php echo htmlentities($_SESSION['userinfo']['firstName']) ?></h3>
@@ -22,12 +21,8 @@
 <h3><?php echo htmlentities($_SESSION['userinfo']['username']) ?></h3>
 <label>- Email:</label>
 <h3><?php echo htmlentities($_SESSION['userinfo']['email']) ?></h3>
-<?php
-if($isAGENT==true){
-?>
 <label>- Department:</label>
 <h3><?php echo htmlentities($depart) ?></h3>
-<?php } ?>
 <label>- Agent:</label>
 <h3>
 <?php 
@@ -44,6 +39,7 @@ if($_SESSION['userinfo']['is_agent']==true){
     echo htmlentities("This user is not an admin");
 }
 ?></h3>
+
 <?php
     drawFooter();
 ?>
