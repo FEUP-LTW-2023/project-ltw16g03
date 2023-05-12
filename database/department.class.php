@@ -60,7 +60,7 @@
       $department = $stmt->fetch();
   
       return new Department(
-        $department['id'], 
+        intval($department['id']), 
         $department['name']
       );
     }  

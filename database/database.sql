@@ -99,7 +99,7 @@ INSERT INTO Department (id, name) VALUES (3, 'Billing and Payments');
 INSERT INTO Department (id, name) VALUES (4, 'Product Feedback');
 INSERT INTO Department (id, name) VALUES (5, 'Marketing');
 INSERT INTO Department (id, name) VALUES (6, 'Human Resources');
-INSERT INTO Department (id, name) VALUES (7, 'Legal');
+INSERT INTO Department (id, name) VALUES (7, 'Sales');
 INSERT INTO Department (id, name) VALUES (8, 'Information Technology');
 INSERT INTO Department (id, name) VALUES (9, 'Quality Assurance');
 INSERT INTO Department (id, name) VALUES (10, 'Sports');
@@ -133,6 +133,8 @@ INSERT INTO Department (id, name) VALUES (37, 'Art');
 INSERT INTO Department (id, name) VALUES (38, 'Design');
 INSERT INTO Department (id, name) VALUES (39, 'Photography');
 INSERT INTO Department (id, name) VALUES (40, 'Others');
+
+
 
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('See a ticket', 'I dont know how to see the status of my ticket', 'Open', 1, NULL, 1);
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Payment issue', 'My payment is not going through', 'Assigned', 2, 7, 3);
