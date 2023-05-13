@@ -232,3 +232,69 @@ function updateUserInfo($id, $firstName, $lastName, $username, $email){
         return false; // User is not an admin
     }
   }
+
+  function userToAdmin($userId, $bl) {
+        try {
+            global $dbh;
+            // Prepare and execute the update statement
+            $stmt = $dbh->prepare('UPDATE User SET is_admin = :bl, is_agent = :bl WHERE id = :userId');
+            $stmt->bindParam(':bl', $bl, PDO::PARAM_STR);
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+  
+            // Check if the update was successful
+            if ($stmt->rowCount() > 0) {
+                return true; 
+            } else {
+                return false; 
+            }
+          
+        } catch (PDOException $e) {
+            echo 'Error updating user: ' . $e->getMessage();
+            return false; 
+        }
+  }
+
+  function userToAgent($userId, $bl) {
+    try {
+        global $dbh;
+        // Prepare and execute the update statement
+        $stmt = $dbh->prepare('UPDATE User SET is_agent = :bl WHERE id = :userId');
+        $stmt->bindParam(':bl', $bl, PDO::PARAM_STR);
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Check if the update was successful
+        if ($stmt->rowCount() > 0) {
+            return true; 
+        } else {
+            return false; 
+        }
+      
+    } catch (PDOException $e) {
+        echo 'Error updating user: ' . $e->getMessage();
+        return false; 
+    }
+  }
+
+  function userFromAgent($userId, $bl) {
+    try {
+        global $dbh;
+        // Prepare and execute the update statement
+        $stmt = $dbh->prepare('UPDATE User SET is_agent = :bl, id_department = null WHERE id = :userId');
+        $stmt->bindParam(':bl', $bl, PDO::PARAM_STR);
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Check if the update was successful
+        if ($stmt->rowCount() > 0) {
+            return true; 
+        } else {
+            return false; 
+        }
+      
+    } catch (PDOException $e) {
+        echo 'Error updating user: ' . $e->getMessage();
+        return false; 
+    }
+  }

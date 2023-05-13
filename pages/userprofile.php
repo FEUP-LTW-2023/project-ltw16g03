@@ -47,7 +47,19 @@ if ($_SESSION['userinfo']['is_agent'] == true || $_SESSION['userinfo']['is_admin
 <?php }else if (($_SESSION['userinfo']['is_agent'] == true || $_SESSION['userinfo']['is_admin'] == true) && $_SESSION['userinfo']['id_department'] == null){?>
 <h3>
 <?php 
-echo htmlentities("This user doesnt have a department") 
+echo htmlentities("This user doesn't have a department");?><br>
+<?php 
+// Display the dropdown list of departments
+$departments = Department::getAll($dbh);
+
+echo '<label>Change user department:</label>';
+echo '<select id="departmentSelect">';
+foreach ($departments as $department) {
+    echo '<option value="' . $department['id'] . '">' . $department['name'] . '</option>';
+}
+echo '</select>';
+echo '<button onclick=updateDepartment()>Change Department</button>';
+
 ?></h3>
 <?php }else{?>
 <h3>
@@ -63,16 +75,81 @@ if($_SESSION['userinfo']['is_agent']==true){
 }else{
     echo htmlentities("This user is not an agent");
 }
+
+if($_SESSION['userinfo']['is_agent']==false){
+    echo '<button onclick="updateUserToAgent()">Update user to agent</button>';
+}else if($_SESSION['userinfo']['is_agent']==true && $_SESSION['userinfo']['is_admin']==false){
+    echo '<button onclick="updateUserFromAgent()">Demote agent to normal user</button>';
+}
 ?></h3>
 <label>- Admin:</label>
-<h3><?php if($_SESSION['userinfo']['is_admin']==true){
+<h3>
+<?php if($_SESSION['userinfo']['is_admin']==true){
     echo htmlentities("This user is an admin");
 }else{
     echo htmlentities("This user is not an admin");
 }
+if($_SESSION['userinfo']['is_admin']==false){
+    echo '<button onclick="updateUserToAdmin()">Update user to admin</button>';
+}
+
 ?></h3>
 
 <script>
+
+    function updateUserToAdmin() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../actions/action_update_userToAdmin.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = xhr.responseText;
+                if (response === 'success') {
+                    // Reload the page without changing the URL
+                    window.location.reload(false);
+                } else {
+                    alert('Failed to update user.');
+                }
+            }
+        };
+        xhr.send('userId=<?php echo $_GET['id']; ?>');
+    }
+
+    function updateUserToAgent() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../actions/action_update_userToAgent.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = xhr.responseText;
+                if (response === 'success') {
+                    // Reload the page without changing the URL
+                    window.location.reload(false);
+                } else {
+                    alert('Failed to update user.');
+                }
+            }
+        };
+        xhr.send('userId=<?php echo $_GET['id']; ?>');
+    }
+
+    function updateUserFromAgent() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../actions/action_update_userFromAgent.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = xhr.responseText;
+                if (response === 'success') {
+                    // Reload the page without changing the URL
+                    window.location.reload(false);
+                } else {
+                    alert('Failed to update user.');
+                }
+            }
+        };
+        xhr.send('userId=<?php echo $_GET['id']; ?>');
+    }
      
     function updateDepartment() {
         var departmentId = document.getElementById('departmentSelect').value;
