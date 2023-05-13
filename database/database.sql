@@ -140,11 +140,11 @@ INSERT INTO Department (id, name) VALUES (40, 'Others');
 
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('See a ticket', 'I dont know how to see the status of my ticket', 'Open', 1, NULL, 1);
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Payment issue', 'My payment is not going through', 'Assigned', 2, 7, 3);
-INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Bug in software', 'There is a bug in your software', 'Closed', 5, 2, 2);
+INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department, feedback, client_answer) VALUES ('Bug in software', 'There is a bug in your software', 'Closed', 5, 2, 2, 'Be more specific, told us more details','When i search for a department i cant open a specific department');
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Shipping delay', 'My order is delayed in shipping', 'Open', 5, NULL, 5);
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Product damaged', 'My product arrived damaged', 'Open', 6, NULL, 4);
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Refund request', 'I would like to request a refund', 'Open', 1, NULL, 3);
-INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Order status', 'I would like to know the status of my order', 'Open', 10, 3, 5);
+INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department, feedback) VALUES ('Order status', 'I would like to know the status of my order', 'Assigned', 10, 3, 5, 'Just click on the product details to know that');
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Product question', 'I have a question about your product', 'Closed', 8, 6, 1);
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Order issue', 'There is an issue with my order', 'Open', 10, NULL, 10);
 INSERT INTO Ticket(title, description, ticket_status, id_user, id_agent, id_department) VALUES ('Billing inquiry', 'I have a question about my bill', 'Assigned', 2, 6, 3);

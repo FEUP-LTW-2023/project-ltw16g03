@@ -158,7 +158,7 @@
       return $tickets;
   }
   
-  static function updateTicketAgent($ticketId, $agentId) {
+  static function updateTicketAgent($ticketId, $agentId, $assig) {
     $userAgent = isAgent(getUserID());
 
     if ($userAgent) {
@@ -173,8 +173,9 @@
 
             if ($agentExists) {
                 // Prepare and execute the update statement
-                $stmt = $dbh->prepare('UPDATE Ticket SET id_agent = :agentId WHERE id = :ticketId');
+                $stmt = $dbh->prepare('UPDATE Ticket SET id_agent = :agentId, ticket_status = :assig WHERE id = :ticketId');
                 $stmt->bindParam(':agentId', $agentId, PDO::PARAM_INT);
+                $stmt->bindParam(':assig', $assig, PDO::PARAM_STR);
                 $stmt->bindParam(':ticketId', $ticketId, PDO::PARAM_INT);
                 $stmt->execute();
 
@@ -222,6 +223,64 @@ static function updateTicketDepartment($ticketId, $newDepartmentId) {
       }
   } else {
       echo 'Only agents can update ticket departments.';
+      return false; // User is not an agent
+  }
+}
+
+static function closeTicket($ticketId, $assig) {
+  $userAgent = isAgent(getUserID());
+
+  if ($userAgent) {
+      try {
+          global $dbh;
+          // Prepare and execute the update statement
+          $stmt = $dbh->prepare('UPDATE Ticket SET ticket_status = :assig WHERE id = :ticketId');
+          $stmt->bindParam(':assig', $assig, PDO::PARAM_STR);
+          $stmt->bindParam(':ticketId', $ticketId, PDO::PARAM_INT);
+          $stmt->execute();
+
+          // Check if the update was successful
+          if ($stmt->rowCount() > 0) {
+              return true; // Ticket agent updated successfully
+          } else {
+              return false; // No ticket found with the given ID
+          }
+        
+      } catch (PDOException $e) {
+          echo 'Error updating ticket status: ' . $e->getMessage();
+          return false; // An error occurred while updating the ticket agent
+      }
+  } else {
+      echo 'Only agents can update ticket agents.';
+      return false; // User is not an agent
+  }
+}
+
+static function reopenTicket($ticketId, $assig) {
+  $userAgent = isAgent(getUserID());
+
+  if ($userAgent) {
+      try {
+          global $dbh;
+          // Prepare and execute the update statement
+          $stmt = $dbh->prepare('UPDATE Ticket SET ticket_status = :assig WHERE id = :ticketId');
+          $stmt->bindParam(':assig', $assig, PDO::PARAM_STR);
+          $stmt->bindParam(':ticketId', $ticketId, PDO::PARAM_INT);
+          $stmt->execute();
+
+          // Check if the update was successful
+          if ($stmt->rowCount() > 0) {
+              return true; // Ticket agent updated successfully
+          } else {
+              return false; // No ticket found with the given ID
+          }
+        
+      } catch (PDOException $e) {
+          echo 'Error updating ticket status: ' . $e->getMessage();
+          return false; // An error occurred while updating the ticket agent
+      }
+  } else {
+      echo 'Only agents can update ticket agents.';
       return false; // User is not an agent
   }
 }

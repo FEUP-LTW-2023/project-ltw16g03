@@ -67,7 +67,7 @@ if ($ag == null && isAgent(getUserID())) {
     echo '<button onclick="assignTicket()">Assign Ticket</button>';
 }
 
-if ($_SESSION['ticketinfo']['id_agent'] == getUserID()) {
+if ($_SESSION['ticketinfo']['id_agent'] == getUserID() && $_SESSION['ticketinfo']['ticket_status'] != 'Closed') {
     // Display the dropdown list of departments
     $departments = Department::getAll($dbh);
 
@@ -79,6 +79,14 @@ if ($_SESSION['ticketinfo']['id_agent'] == getUserID()) {
     echo '</select>';
     echo '<button onclick=updateDepartment()>Change Department</button>';
 
+}
+?>
+<br>
+<?php
+if ($_SESSION['ticketinfo']['id_agent'] == getUserID() && $_SESSION['ticketinfo']['ticket_status'] != 'Closed') {
+    echo '<button onclick="closeTicket()">Close this Ticket</button>';
+}else if($_SESSION['ticketinfo']['id_agent'] == getUserID() && $_SESSION['ticketinfo']['ticket_status'] == 'Closed'){
+    echo '<button onclick="reopenTicket()">Reopen this Ticket</button>';
 }
 ?>
 
@@ -96,6 +104,42 @@ if ($_SESSION['ticketinfo']['id_agent'] == getUserID()) {
                     window.location.reload(false);
                 } else {
                     alert('Failed to assign ticket.');
+                }
+            }
+        };
+        xhr.send('ticketId=<?php echo $_GET['id']; ?>');
+    }
+
+    function closeTicket() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../actions/action_close_ticket_status.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = xhr.responseText;
+                if (response === 'success') {
+                    // Reload the page without changing the URL
+                    window.location.reload(false);
+                } else {
+                    alert('Failed to update ticket status.');
+                }
+            }
+        };
+        xhr.send('ticketId=<?php echo $_GET['id']; ?>');
+    }
+
+    function reopenTicket() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../actions/action_reopen_ticket_status.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = xhr.responseText;
+                if (response === 'success') {
+                    // Reload the page without changing the URL
+                    window.location.reload(false);
+                } else {
+                    alert('Failed to update ticket status.');
                 }
             }
         };
