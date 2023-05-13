@@ -37,6 +37,30 @@ if ($ag == null) {
 <label>- Ticket created by:</label>
 <h3><?php echo htmlentities($us) ?></h3>
 
+<label>- Agent feedback:</label>
+<h3><?php 
+if ($ag == null) {
+    echo htmlentities("This ticket has no agent so there is no feedback");
+} else if($_SESSION['ticketinfo']['feedback'] == null){
+    echo htmlentities("This ticket's agent didn't give a feedback yet");
+} else{
+    echo htmlentities($_SESSION['ticketinfo']['feedback']);
+}
+?></h3>
+
+<label>- Client answer to agent's feedback:</label>
+<h3><?php 
+if ($ag == null) {
+    echo htmlentities("This ticket has no agent so there is no feedback and no answer from the client");
+} else if($_SESSION['ticketinfo']['feedback'] == null){
+    echo htmlentities("This ticket's agent didn't give a feedback so there is no answer from the client");
+} else if ($_SESSION['ticketinfo']['client_answer'] == null){
+    echo htmlentities("This ticket's client didn't give an answer to the agent's feedback yet");
+} else{
+    echo htmlentities($_SESSION['ticketinfo']['client_answer']);
+}
+?></h3>
+
 <?php
 // Check if the ticket has no assigned agent and the user is an agent
 if ($ag == null && isAgent(getUserID())) {

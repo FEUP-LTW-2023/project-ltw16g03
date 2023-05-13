@@ -11,8 +11,10 @@
     public int $id_user;
     public int $id_agent;
     public int $id_department;
+    public string $feedback;
+    public string $client_answer;
     
-    public function __construct(int $id, string $title, string $description, string $ticket_status, datetime $created_at, datetime $updated_at, int $id_user, int $id_agent, int $id_department)
+    public function __construct(int $id, string $title, string $description, string $ticket_status, datetime $created_at, datetime $updated_at, int $id_user, int $id_agent, int $id_department, string $feedback, string $client_answer)
     {
         $this->id = $id;
         $this->title = $title;
@@ -23,6 +25,8 @@
         $this->id_user = $id_user;
         $this->id_agent = $id_agent;
         $this->id_department = $id_department;
+        $this->feedback = $feedback;
+        $this->client_answer = $client_answer;
     }
 
     function edit($db) {
@@ -38,7 +42,7 @@
     static function get(int $id) : Ticket {
       global $dbh;
       $stmt = $dbh->prepare('
-        SELECT id, title, description, ticket_status, created_at, updated_at, id_user, id_agent, id_department
+        SELECT id, title, description, ticket_status, created_at, updated_at, id_user, id_agent, id_department, feedback, client_answer
         FROM Ticket 
         WHERE id = ?
       ');
@@ -55,7 +59,9 @@
         $ticket['udpated_at'],
         $ticket['id_user'],
         $ticket['id_agent'],
-        $ticket['id_department']
+        $ticket['id_department'],
+        $ticket['feedback'],
+        $ticket['client_answer']
       );
     }
 
@@ -130,7 +136,7 @@
     static function getTicket(int $id) {
       global $dbh;
     try {
-      $stmt = $dbh->prepare('SELECT id, title, description, ticket_status, id_department, id_agent, id_user FROM Ticket WHERE id = ?');
+      $stmt = $dbh->prepare('SELECT id, title, description, ticket_status, id_department, id_agent, id_user, feedback, client_answer FROM Ticket WHERE id = ?');
       $stmt->execute(array($id));
       return $stmt->fetch();
     
