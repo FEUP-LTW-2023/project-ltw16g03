@@ -203,3 +203,32 @@ function updateUserInfo($id, $firstName, $lastName, $username, $email){
       return false;
     }
   }
+
+  function updateUserDepartment($userId, $newDepartmentId) {
+    $userAA = (isAgent($userId) || isAdmin($userId));
+  
+    if ($userAA) {
+        try {
+            global $dbh;
+  
+            // Prepare and execute the update statement
+            $stmt = $dbh->prepare('UPDATE User SET id_department = :newDepartmentId WHERE id = :userId');
+            $stmt->bindParam(':newDepartmentId', $newDepartmentId, PDO::PARAM_INT);
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+  
+            // Check if the update was successful
+            if ($stmt->rowCount() > 0) {
+                return true; // User department updated successfully
+            } else {
+                return false; // No user found with the given ID
+            }
+        } catch (PDOException $e) {
+            echo 'Error updating ticket department: ' . $e->getMessage();
+            return false; // An error occurred while updating the user department
+        }
+    } else {
+        echo 'Only admins can update user departments.';
+        return false; // User is not an admin
+    }
+  }

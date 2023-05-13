@@ -57,6 +57,8 @@ CREATE TABLE Ticket (
     id_user INTEGER, /* id do client que criou o ticket */
     id_agent INTEGER DEFAULT NULL, /* id do agent que está a tratar do ticket */
     id_department INTEGER, /* id do department do ticket */
+    feedback VARCHAR(255) DEFAULT NULL,
+    client_answer VARCHAR(255) DEFAULT NULL,
     CONSTRAINT current_edit_date_ck CHECK (created_at <= updated_at),
     CONSTRAINT id_usertFK FOREIGN KEY(id_user) REFERENCES User(id),
     CONSTRAINT id_agentFK FOREIGN KEY(id_agent) REFERENCES User(id),

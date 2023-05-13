@@ -12,7 +12,7 @@ if (searchDepartment) {
       const img = document.createElement('img')
       img.src = 'https://picsum.photos/id/1/200/300?' + department.id
       const link = document.createElement('a')
-      link.href = '../pages/department.php?id=' + department.id
+      link.href = '../pages/departmentTicket.php?id=' + department.id
       link.textContent = department.name
       article.appendChild(img)
       article.appendChild(link)
