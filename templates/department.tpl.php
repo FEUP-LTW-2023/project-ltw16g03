@@ -38,10 +38,12 @@
       $id_t = $ticket['id'];
       $title_t = $ticket['title'];
       $description_t = $ticket['description'];
+      $status_t = $ticket['ticket_status'];
     ?>
     <div class="ticket" id="<?=$id_t?>">
       <h3> <?=$title_t?></h3>
       <p> <?=$description_t?> </p>
+      <p>-- <?=$status_t?> --</p>
       <a href="../pages/detailTicket.php?id=<?=$ticket['id']?>" class="button">Detalhes</a>
     </div>
     <?php } ?>

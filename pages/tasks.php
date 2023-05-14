@@ -29,12 +29,36 @@
             <h3> <?=$tasks[$i]['title']?></h3>
             <p> <?=$tasks[$i]['description']?> </p>
             <p> <?=$comp?> </p>
-            <a href="../pages/detailTicket.php?id=<?=$tickets[$i]['id']?>" class="button">Detalhes</a>
+            <?php
+            if ($tasks[$i]['is_completed'] == false) {
+                echo '<button onclick="closeTask()">Close this Task</button>';
+            }
+            ?>
           </div>
         </li>
         <?php } ?>   
       </ul>
     </section>
+
+    <script>
+      function closeTask() {
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '../actions/action_close_task.php', true);
+          xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          xhr.onreadystatechange = function() {
+              if (xhr.readyState === 4 && xhr.status === 200) {
+                  var response = xhr.responseText;
+                  if (response === 'success') {
+                      // Reload the page without changing the URL
+                      window.location.reload(false);
+                  } else {
+                      alert('Failed to update task status.');
+                  }
+              }
+          };
+          xhr.send('taskId=<?php echo $_GET['id']; ?>');
+      }
+    </script>
   
 <?php
   drawFooter();

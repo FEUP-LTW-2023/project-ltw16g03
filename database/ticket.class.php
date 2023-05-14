@@ -67,7 +67,7 @@
 
     static function getAll(PDO $db){
       $stmt = $db->prepare('
-        SELECT id, title, description, id_department
+        SELECT id, title, description, id_department, ticket_status
         FROM Ticket 
         ORDER by updated_at desc
       ');
@@ -79,7 +79,7 @@
 
     static function getTicketsbyUser(PDO $db, int $id_user){
       $stmt = $db->prepare('
-        SELECT id, title, description, id_department
+        SELECT id, title, description, id_department, ticket_status
         FROM Ticket 
         WHERE id_user = ?
         ORDER by updated_at desc
@@ -92,7 +92,7 @@
 
     static function getTicketsbyDepartment(PDO $db, int $id_department) {
       $stmt = $db->prepare('
-        SELECT id, title, description
+        SELECT id, title, description, ticket_status
         FROM Ticket 
         WHERE id_department = ?
         ORDER by updated_at desc
@@ -283,6 +283,32 @@ static function reopenTicket($ticketId, $assig) {
       echo 'Only agents can update ticket agents.';
       return false; // User is not an agent
   }
+}
+
+static function getTicketsWithoutAgent(PDO $db, int $id_department){
+  $stmt = $db->prepare('
+    SELECT id, title, description, id_department, id_agent
+    FROM Ticket
+    WHERE id_department = ? AND id_agent IS NULL
+    ORDER by updated_at desc
+  ');
+
+  $stmt->execute(array($id_department));
+  $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  return $row;
+}
+
+static function getTicketsAgent(PDO $db, int $id_agent){
+  $stmt = $db->prepare('
+    SELECT id, title, description, id_department, ticket_status
+    FROM Ticket
+    WHERE id_agent = ?
+    ORDER by updated_at desc
+  ');
+
+  $stmt->execute(array($id_agent));
+  $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  return $row;
 }
 
   }
