@@ -13,8 +13,9 @@
     public int $id_department;
     public string $feedback;
     public string $client_answer;
+    public array $hashtags;
     
-    public function __construct(int $id, string $title, string $description, string $ticket_status, datetime $created_at, datetime $updated_at, int $id_user, int $id_agent, int $id_department, string $feedback, string $client_answer)
+    public function __construct(int $id, string $title, string $description, string $ticket_status, datetime $created_at, datetime $updated_at, int $id_user, int $id_agent, int $id_department, string $feedback, string $client_answer, array $hashtags)
     {
         $this->id = $id;
         $this->title = $title;
@@ -27,6 +28,7 @@
         $this->id_department = $id_department;
         $this->feedback = $feedback;
         $this->client_answer = $client_answer;
+        $this->hashtags = $hashtags;
     }
 
     function edit($db) {
@@ -61,7 +63,8 @@
         $ticket['id_agent'],
         $ticket['id_department'],
         $ticket['feedback'],
-        $ticket['client_answer']
+        $ticket['client_answer'],
+        $ticket['hashtags']
       );
     }
 
@@ -309,6 +312,21 @@ static function getTicketsAgent(PDO $db, int $id_agent){
   $stmt->execute(array($id_agent));
   $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
   return $row;
+}
+
+static function getTicketHashtags(PDO $db, int $ticketId) {
+  $query = "SELECT h.tag
+            FROM Ticket_Hashtag th
+            JOIN Hashtag h ON th.id_hashtag = h.id
+            WHERE th.id_ticket = :ticketId";
+            
+  $stmt = $db->prepare($query);
+  $stmt->bindParam(':ticketId', $ticketId, PDO::PARAM_INT);
+  $stmt->execute();
+  
+  $hashtags = $stmt->fetchAll(PDO::FETCH_COLUMN);
+  
+  return $hashtags;
 }
 
   }
