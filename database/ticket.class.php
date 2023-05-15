@@ -116,8 +116,8 @@
       $stmt->execute(array($id));
     }
 
-    static function create(PDO $db, string $id_department, string $title, string $description, int $id_user) : int {
-
+    static function create(PDO $db, string $id_department, string $title, string $description, int $id_user, array $hashtags) : int {
+      // Insert the ticket into the Ticket table
       $sql = "INSERT INTO Ticket (title, description, id_department, id_user) VALUES (:title, :description, :id_department, :id_user)";
       $stmt= $db->prepare($sql);
       $stmt->bindValue('title', $title, PDO::PARAM_STR);
@@ -125,16 +125,45 @@
       $stmt->bindValue('id_department', $id_department, PDO::PARAM_INT);
       $stmt->bindValue('id_user', $id_user, PDO::PARAM_INT);
       $stmt->execute();
-      
-      //checkar nome ticket sempre diferente
-      
-      //Return new ticket id
-      $sql = "SELECT id from Ticket ORDER BY ID DESC LIMIT 1";
-      $stmt= $db->prepare($sql);
-      $stmt->execute();
-      $id = $stmt->fetch();
-      return intval($id['id']);
+    
+      // Get the newly inserted ticket id
+      $ticketId = (int)$db->lastInsertId();
+    
+      // Insert the hashtags into the Ticket_Hashtag table
+      $sql = "INSERT INTO Ticket_Hashtag (id_ticket, id_hashtag) VALUES (:ticketId, :hashtagId)";
+      $stmt = $db->prepare($sql);
+      foreach ($hashtags as $hashtag) {
+        $hashtagId = self::getHashtagId($db, $hashtag); // Get the hashtag id from the Hashtag table
+        $stmt->bindValue('ticketId', $ticketId, PDO::PARAM_INT);
+        $stmt->bindValue('hashtagId', $hashtagId, PDO::PARAM_INT);
+        $stmt->execute();
+      }
+    
+      return $ticketId;
     }
+    
+    static function getHashtagId(PDO $db, string $hashtag): int {
+      // Check if the hashtag already exists in the Hashtag table
+      $sql = "SELECT id FROM Hashtag WHERE tag = :hashtag";
+      $stmt = $db->prepare($sql);
+      $stmt->bindValue('hashtag', $hashtag, PDO::PARAM_STR);
+      $stmt->execute();
+    
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+      if ($result) {
+        // Hashtag exists, return the existing id
+        return intval($result['id']);
+      } else {
+        // Hashtag does not exist, insert it into the Hashtag table and return the new id
+        $sql = "INSERT INTO Hashtag (tag) VALUES (:hashtag)";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue('hashtag', $hashtag, PDO::PARAM_STR);
+        $stmt->execute();
+    
+        return intval($db->lastInsertId());
+      }
+    }
+    
 
     static function getTicket(int $id) {
       global $dbh;

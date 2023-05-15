@@ -11,6 +11,10 @@ $depart = Department::getName($_SESSION['ticketinfo']['id_department']);
 $us = getUserna($_SESSION['ticketinfo']['id_user']);
 $ag = getUserna($_SESSION['ticketinfo']['id_agent']);
 
+$ticketId = $_SESSION['ticketinfo']['id'];
+$hashtags = Ticket::getTicketHashtags($dbh, $ticketId);
+
+
 drawHeader();
 ?>
 
@@ -24,6 +28,12 @@ drawHeader();
 
 <label>- Department:</label>
 <h3><?php echo htmlentities($depart) ?></h3>
+
+<label>- Hashtags:</label>
+<?php foreach ($hashtags as $hashtag): ?>
+    <span class="hashtag"><?php echo htmlentities($hashtag); ?></span>
+<?php endforeach; ?><br>
+
 
 <label>- Agent working on ticket:</label>
 <h3><?php 
