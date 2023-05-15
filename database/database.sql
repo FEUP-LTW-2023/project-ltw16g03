@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS Ticket;
 DROP TABLE IF EXISTS Hashtag;
 DROP TABLE IF EXISTS Ticket_Hashtag;
 DROP TABLE IF EXISTS Faq;
+DROP TABLE IF EXISTS Reply;
 
 --Tables
 
@@ -82,6 +83,16 @@ CREATE TABLE Faq (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title varchar(255) NOT NULL UNIQUE,
     description text NOT NULL
+);
+
+CREATE TABLE Reply (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_ticket INTEGER,
+    id_user INTEGER,
+    content VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT id_ticketFK FOREIGN KEY(id_ticket) REFERENCES Ticket (id),
+    CONSTRAINT id_userFK FOREIGN KEY(id_user) REFERENCES User (id)
 );
 
 INSERT INTO User (id, username, firstName, lastName, email, password, id_department, is_agent, is_admin) VALUES (1, 'Rafa', 'Rafael', 'Alves', 'rafa@gmail.com', 'cd882b791d2f3999d17672bfe317683d0989890e5f96b4d4d6df3f4597e03d2d', NULL, false, false); /*Pass*word1*/
@@ -190,3 +201,5 @@ INSERT INTO Faq (id, title, description) VALUES (4, 'Can I track the status of m
 INSERT INTO Faq (id, title, description) VALUES (5, 'What information should I include in my trouble ticket?', 'To help us quickly and accurately diagnose and resolve your issue, please include as much detail as possible in your ticket submission. This may include a description of the issue, any error messages or screenshots, and any steps you have already taken to try to resolve the issue.');
 INSERT INTO Faq (id, title, description) VALUES (6, 'How do I cancel a ticket?', 'You can cancel a ticket by navigating to the ticket in question.');
 INSERT INTO Faq (id, title, description) VALUES (7, 'What types of issues can I submit a trouble ticket for?', 'You can submit a trouble ticket for any technical issue or problem that you are experiencing with a product or service.');
+
+INSERT INTO Reply (id, id_ticket, id_user, content) VALUES (1, 2, 7, 'Hello, I am sorry to hear that you are having trouble with your order. I will look into this issue and get back to you as soon as possible.');

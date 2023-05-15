@@ -136,7 +136,7 @@
     static function getTicket(int $id) {
       global $dbh;
     try {
-      $stmt = $dbh->prepare('SELECT id, title, description, ticket_status, id_department, id_agent, id_user, feedback, client_answer FROM Ticket WHERE id = ?');
+      $stmt = $dbh->prepare('SELECT id, title, description, ticket_status, id_department, id_agent, id_user, feedback, client_answer, created_at FROM Ticket WHERE id = ?');
       $stmt->execute(array($id));
       return $stmt->fetch();
     
