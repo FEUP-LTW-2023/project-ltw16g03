@@ -67,6 +67,20 @@ function isLoginCorrect($username, $password) {
     }
   }
 
+  function getUserDepart($id) {
+    global $dbh;
+    try {
+      $stmt = $dbh->prepare('SELECT id_department FROM User WHERE id = ?');
+      $stmt->execute(array($id));
+      if($row = $stmt->fetch()){
+        return $row['id_department'];
+      }
+    
+    }catch(PDOException $e) {
+      return -1;
+    }
+  }
+
   function duplicateUsername($username) {
     global $dbh;
     try {

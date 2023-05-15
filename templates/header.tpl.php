@@ -40,9 +40,11 @@
                 <li><a href="/pages/users.php">Users</a></li>
                 <?php } ?> 
                 <?php
-                if($isADMIN==true && $isAGENT==true){
+                if($isADMIN==true || $isAGENT==true){
                 ?>
                 <li><a href="/pages/tasks.php">My Tasks</a></li>
+                <li><a href="/pages/ticketAvailable.php">Tickets Available</a></li>
+                <li><a href="/pages/ticketsToHandle.php">My Tickets to handle</a></li>
                 <?php } ?> 
             </ul>
             </nav>

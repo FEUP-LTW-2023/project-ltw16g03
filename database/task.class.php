@@ -55,6 +55,35 @@
       $id = $stmt->fetch();
       return intval($id['id']);
     }
+
+    static function closeTask($taskId, $co) {
+      $userAgent = isAgent(getUserID());
+    
+      if ($userAgent) {
+          try {
+              global $dbh;
+              // Prepare and execute the update statement
+              $stmt = $dbh->prepare('UPDATE Task SET is_completed = :co WHERE id = :taskId');
+              $stmt->bindParam(':co', $co, PDO::PARAM_BOOL);
+              $stmt->bindParam(':taskId', $taskId, PDO::PARAM_INT);
+              $stmt->execute();
+    
+              // Check if the update was successful
+              if ($stmt->rowCount() > 0) {
+                  return true; 
+              } else {
+                  return false;
+              }
+            
+          } catch (PDOException $e) {
+              echo 'Error updating task status: ' . $e->getMessage();
+              return false;
+          }
+      } else {
+          echo 'Only agents can update task.';
+          return false; // User is not an agent
+      }
+    }
   
   }
 ?>

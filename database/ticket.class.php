@@ -13,8 +13,9 @@
     public int $id_department;
     public string $feedback;
     public string $client_answer;
+    public array $hashtags;
     
-    public function __construct(int $id, string $title, string $description, string $ticket_status, datetime $created_at, datetime $updated_at, int $id_user, int $id_agent, int $id_department, string $feedback, string $client_answer)
+    public function __construct(int $id, string $title, string $description, string $ticket_status, datetime $created_at, datetime $updated_at, int $id_user, int $id_agent, int $id_department, string $feedback, string $client_answer, array $hashtags)
     {
         $this->id = $id;
         $this->title = $title;
@@ -27,6 +28,7 @@
         $this->id_department = $id_department;
         $this->feedback = $feedback;
         $this->client_answer = $client_answer;
+        $this->hashtags = $hashtags;
     }
 
     function edit($db) {
@@ -61,13 +63,14 @@
         $ticket['id_agent'],
         $ticket['id_department'],
         $ticket['feedback'],
-        $ticket['client_answer']
+        $ticket['client_answer'],
+        $ticket['hashtags']
       );
     }
 
     static function getAll(PDO $db){
       $stmt = $db->prepare('
-        SELECT id, title, description, id_department
+        SELECT id, title, description, id_department, ticket_status
         FROM Ticket 
         ORDER by updated_at desc
       ');
@@ -79,7 +82,7 @@
 
     static function getTicketsbyUser(PDO $db, int $id_user){
       $stmt = $db->prepare('
-        SELECT id, title, description, id_department
+        SELECT id, title, description, id_department, ticket_status
         FROM Ticket 
         WHERE id_user = ?
         ORDER by updated_at desc
@@ -92,7 +95,7 @@
 
     static function getTicketsbyDepartment(PDO $db, int $id_department) {
       $stmt = $db->prepare('
-        SELECT id, title, description
+        SELECT id, title, description, ticket_status
         FROM Ticket 
         WHERE id_department = ?
         ORDER by updated_at desc
@@ -113,8 +116,8 @@
       $stmt->execute(array($id));
     }
 
-    static function create(PDO $db, string $id_department, string $title, string $description, int $id_user) : int {
-
+    static function create(PDO $db, string $id_department, string $title, string $description, int $id_user, array $hashtags) : int {
+      // Insert the ticket into the Ticket table
       $sql = "INSERT INTO Ticket (title, description, id_department, id_user) VALUES (:title, :description, :id_department, :id_user)";
       $stmt= $db->prepare($sql);
       $stmt->bindValue('title', $title, PDO::PARAM_STR);
@@ -122,16 +125,45 @@
       $stmt->bindValue('id_department', $id_department, PDO::PARAM_INT);
       $stmt->bindValue('id_user', $id_user, PDO::PARAM_INT);
       $stmt->execute();
-      
-      //checkar nome ticket sempre diferente
-      
-      //Return new ticket id
-      $sql = "SELECT id from Ticket ORDER BY ID DESC LIMIT 1";
-      $stmt= $db->prepare($sql);
-      $stmt->execute();
-      $id = $stmt->fetch();
-      return intval($id['id']);
+    
+      // Get the newly inserted ticket id
+      $ticketId = (int)$db->lastInsertId();
+    
+      // Insert the hashtags into the Ticket_Hashtag table
+      $sql = "INSERT INTO Ticket_Hashtag (id_ticket, id_hashtag) VALUES (:ticketId, :hashtagId)";
+      $stmt = $db->prepare($sql);
+      foreach ($hashtags as $hashtag) {
+        $hashtagId = self::getHashtagId($db, $hashtag); // Get the hashtag id from the Hashtag table
+        $stmt->bindValue('ticketId', $ticketId, PDO::PARAM_INT);
+        $stmt->bindValue('hashtagId', $hashtagId, PDO::PARAM_INT);
+        $stmt->execute();
+      }
+    
+      return $ticketId;
     }
+    
+    static function getHashtagId(PDO $db, string $hashtag): int {
+      // Check if the hashtag already exists in the Hashtag table
+      $sql = "SELECT id FROM Hashtag WHERE tag = :hashtag";
+      $stmt = $db->prepare($sql);
+      $stmt->bindValue('hashtag', $hashtag, PDO::PARAM_STR);
+      $stmt->execute();
+    
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+      if ($result) {
+        // Hashtag exists, return the existing id
+        return intval($result['id']);
+      } else {
+        // Hashtag does not exist, insert it into the Hashtag table and return the new id
+        $sql = "INSERT INTO Hashtag (tag) VALUES (:hashtag)";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue('hashtag', $hashtag, PDO::PARAM_STR);
+        $stmt->execute();
+    
+        return intval($db->lastInsertId());
+      }
+    }
+    
 
     static function getTicket(int $id) {
       global $dbh;
@@ -283,6 +315,47 @@ static function reopenTicket($ticketId, $assig) {
       echo 'Only agents can update ticket agents.';
       return false; // User is not an agent
   }
+}
+
+static function getTicketsWithoutAgent(PDO $db, int $id_department){
+  $stmt = $db->prepare('
+    SELECT id, title, description, id_department, id_agent
+    FROM Ticket
+    WHERE id_department = ? AND id_agent IS NULL
+    ORDER by updated_at desc
+  ');
+
+  $stmt->execute(array($id_department));
+  $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  return $row;
+}
+
+static function getTicketsAgent(PDO $db, int $id_agent){
+  $stmt = $db->prepare('
+    SELECT id, title, description, id_department, ticket_status
+    FROM Ticket
+    WHERE id_agent = ?
+    ORDER by updated_at desc
+  ');
+
+  $stmt->execute(array($id_agent));
+  $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  return $row;
+}
+
+static function getTicketHashtags(PDO $db, int $ticketId) {
+  $query = "SELECT h.tag
+            FROM Ticket_Hashtag th
+            JOIN Hashtag h ON th.id_hashtag = h.id
+            WHERE th.id_ticket = :ticketId";
+            
+  $stmt = $db->prepare($query);
+  $stmt->bindParam(':ticketId', $ticketId, PDO::PARAM_INT);
+  $stmt->execute();
+  
+  $hashtags = $stmt->fetchAll(PDO::FETCH_COLUMN);
+  
+  return $hashtags;
 }
 
   }

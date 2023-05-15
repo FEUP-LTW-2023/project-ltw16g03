@@ -13,6 +13,10 @@ $replies = Reply::getRepliesByTicket($dbh, $_SESSION['ticketinfo']['id']);
 $us = getUserna($_SESSION['ticketinfo']['id_user']);
 $ag = getUserna($_SESSION['ticketinfo']['id_agent']);
 
+$ticketId = $_SESSION['ticketinfo']['id'];
+$hashtags = Ticket::getTicketHashtags($dbh, $ticketId);
+
+
 drawHeader();
 
 ?>
@@ -27,7 +31,54 @@ drawHeader();
     <li>Assigned to: <?php echo ($ag == null) ? htmlentities("This ticket has no agent working on it") : htmlentities($ag); ?></li>
 </ul>
 
-<hr />
+<label>- Ticket Status:</label>
+<h3><?php echo htmlentities($_SESSION['ticketinfo']['ticket_status']) ?></h3>
+
+<label>- Department:</label>
+<h3><?php echo htmlentities($depart) ?></h3>
+
+<label>- Hashtags:</label>
+<?php foreach ($hashtags as $hashtag): ?>
+    <span class="hashtag"><?php echo htmlentities($hashtag); ?></span>
+<?php endforeach; ?><br>
+
+
+<label>- Agent working on ticket:</label>
+<h3><?php 
+if ($ag == null) {
+    echo htmlentities("This ticket has no agent working on it");
+} else {
+    echo htmlentities($ag);
+}
+?></h3>
+
+<label>- Ticket created by:</label>
+<h3><?php echo htmlentities($us) ?></h3>
+
+<label>- Agent feedback:</label>
+<h3><?php 
+if ($ag == null) {
+    echo htmlentities("This ticket has no agent so there is no feedback");
+} else if($_SESSION['ticketinfo']['feedback'] == null){
+    echo htmlentities("This ticket's agent didn't give a feedback yet");
+} else{
+    echo htmlentities($_SESSION['ticketinfo']['feedback']);
+}
+?></h3>
+
+<label>- Client answer to agent's feedback:</label>
+<h3><?php 
+if ($ag == null) {
+    echo htmlentities("This ticket has no agent so there is no feedback and no answer from the client");
+} else if($_SESSION['ticketinfo']['feedback'] == null){
+    echo htmlentities("This ticket's agent didn't give a feedback so there is no answer from the client");
+} else if ($_SESSION['ticketinfo']['client_answer'] == null){
+    echo htmlentities("This ticket's client didn't give an answer to the agent's feedback yet");
+} else{
+    echo htmlentities($_SESSION['ticketinfo']['client_answer']);
+}
+?></h3>
+
 <?php
 // Check if the ticket has no assigned agent and the user is an agent
 if ($ag == null && isAgent(getUserID())) {

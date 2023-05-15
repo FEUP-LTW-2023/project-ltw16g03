@@ -26,6 +26,7 @@
             <h3> <?=$tickets[$i]['title']?></h3>
             <p> <?=$tickets[$i]['description']?> </p>
             <p> Department: <?=$depart?> </p>
+            <p>-- <?=$tickets[$i]['ticket_status']?> --</p>
             <a href="../pages/detailTicket.php?id=<?=$tickets[$i]['id']?>" class="button">Detalhes</a>
           </div>
         </li>
