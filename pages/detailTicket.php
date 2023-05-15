@@ -24,60 +24,21 @@ drawHeader();
 <h1><?php echo htmlentities($_SESSION['ticketinfo']['title']) ?></h1>
 
 <h2>Ticket Information</h2>
+
 <ul>
     <li>Client: <?php echo htmlentities($us) ?></li>
     <li>Status: <?php echo htmlentities($_SESSION['ticketinfo']['ticket_status']) ?></li>
     <li>Department: <?php echo htmlentities($depart) ?></li>
     <li>Assigned to: <?php echo ($ag == null) ? htmlentities("This ticket has no agent working on it") : htmlentities($ag); ?></li>
+    <li>Created at: <?php echo htmlentities($_SESSION['ticketinfo']['created_at']) ?></li>
+    <li>Hashtags: <?php foreach ($hashtags as $hashtag): ?>
+    <span class="hashtag"><?php echo htmlentities($hashtag); ?>&nbsp;</span>
+    
+    <?php endforeach; ?></li>
 </ul>
-
-<label>- Ticket Status:</label>
-<h3><?php echo htmlentities($_SESSION['ticketinfo']['ticket_status']) ?></h3>
-
-<label>- Department:</label>
-<h3><?php echo htmlentities($depart) ?></h3>
-
-<label>- Hashtags:</label>
-<?php foreach ($hashtags as $hashtag): ?>
-    <span class="hashtag"><?php echo htmlentities($hashtag); ?></span>
-<?php endforeach; ?><br>
-
-
-<label>- Agent working on ticket:</label>
-<h3><?php 
-if ($ag == null) {
-    echo htmlentities("This ticket has no agent working on it");
-} else {
-    echo htmlentities($ag);
-}
-?></h3>
-
-<label>- Ticket created by:</label>
-<h3><?php echo htmlentities($us) ?></h3>
-
-<label>- Agent feedback:</label>
-<h3><?php 
-if ($ag == null) {
-    echo htmlentities("This ticket has no agent so there is no feedback");
-} else if($_SESSION['ticketinfo']['feedback'] == null){
-    echo htmlentities("This ticket's agent didn't give a feedback yet");
-} else{
-    echo htmlentities($_SESSION['ticketinfo']['feedback']);
-}
-?></h3>
-
-<label>- Client answer to agent's feedback:</label>
-<h3><?php 
-if ($ag == null) {
-    echo htmlentities("This ticket has no agent so there is no feedback and no answer from the client");
-} else if($_SESSION['ticketinfo']['feedback'] == null){
-    echo htmlentities("This ticket's agent didn't give a feedback so there is no answer from the client");
-} else if ($_SESSION['ticketinfo']['client_answer'] == null){
-    echo htmlentities("This ticket's client didn't give an answer to the agent's feedback yet");
-} else{
-    echo htmlentities($_SESSION['ticketinfo']['client_answer']);
-}
-?></h3>
+<br>
+<hr>
+<br>
 
 <?php
 // Check if the ticket has no assigned agent and the user is an agent
@@ -107,6 +68,9 @@ if ($_SESSION['ticketinfo']['id_agent'] == getUserID() && $_SESSION['ticketinfo'
     echo '<button onclick="reopenTicket()">Reopen this Ticket</button><hr />';
 }
 ?>
+
+<br>
+
 <h2>Ticket Details</h2>
 
 <div style="padding: 20px; background: #eee; border: 1px solid #ccc; margin-bottom:10px;">
