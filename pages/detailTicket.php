@@ -58,7 +58,7 @@ if (($_SESSION['ticketinfo']['id_agent'] == getUserID() || isAdmin(getUserID()))
 }
 
 // Check if the ticket has no assigned agent and the user is an agent
-if ($ag == null && isAgent(getUserID()) && $_SESSION['ticketinfo']['ticket_status'] != 'Closed') {
+if ($_SESSION['ticketinfo']['id_department'] == $_SESSION['userinfo']['id_department'] && $ag == null && isAgent(getUserID()) && $_SESSION['ticketinfo']['ticket_status'] != 'Closed') {
     echo '<button onclick="assignTicket()">Assign Ticket</button><hr><br>';
 }
 ?>
