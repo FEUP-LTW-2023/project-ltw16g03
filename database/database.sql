@@ -103,7 +103,7 @@ INSERT INTO User (id, username, firstName, lastName, email, password, id_departm
 INSERT INTO User (id, username, firstName, lastName, email, password, id_department, is_agent, is_admin) VALUES (6, 'Marta', 'Marta', 'Santos', 'marta@gmail.com', 'cd882b791d2f3999d17672bfe317683d0989890e5f96b4d4d6df3f4597e03d2d', 3, true, false);
 INSERT INTO User (id, username, firstName, lastName, email, password, id_department, is_agent, is_admin) VALUES (7, 'Pedro', 'Pedro', 'Lima', 'pedro@gmail.com', 'cd882b791d2f3999d17672bfe317683d0989890e5f96b4d4d6df3f4597e03d2d', 4, true, true);
 INSERT INTO User (id, username, firstName, lastName, email, password, id_department, is_agent, is_admin) VALUES (8, 'Camila', 'Camila', 'Rocha', 'camila@gmail.com', 'cd882b791d2f3999d17672bfe317683d0989890e5f96b4d4d6df3f4597e03d2d', 5, true, false);
-INSERT INTO User (id, username, firstName, lastName, email, password, id_department, is_agent, is_admin) VALUES (9, 'Renato', 'Renato', 'Sousa', 'renato@gmail.com', 'cd882b791d2f3999d17672bfe317683d0989890e5f96b4d4d6df3f4597e03d2d', 3, false, false);
+INSERT INTO User (id, username, firstName, lastName, email, password, id_department, is_agent, is_admin) VALUES (9, 'Renato', 'Renato', 'Sousa', 'renato@gmail.com', 'cd882b791d2f3999d17672bfe317683d0989890e5f96b4d4d6df3f4597e03d2d', NULL, false, false);
 INSERT INTO User (id, username, firstName, lastName, email, password, id_department, is_agent, is_admin) VALUES (10, 'Juliana', 'Juliana', 'Barros', 'juliana@gmail.com', 'cd882b791d2f3999d17672bfe317683d0989890e5f96b4d4d6df3f4597e03d2d', NULL, false, false);
 
 INSERT INTO Department (id, name) VALUES (1, 'General Support');

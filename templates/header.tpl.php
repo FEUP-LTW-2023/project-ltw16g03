@@ -43,6 +43,9 @@
                 if($isADMIN==true || $isAGENT==true){
                 ?>
                 <li><a href="/pages/tasks.php">My Tasks</a></li>
+                <?php if ($isAGENT) { ?>
+                    <li><a href="/pages/departmentTicket.php?id=<?php echo intval($_SESSION['userinfo']['id_department']); ?>">My Department</a></li>
+                <?php } ?>                
                 <li><a href="/pages/ticketAvailable.php">Tickets Available</a></li>
                 <li><a href="/pages/ticketsToHandle.php">My Tickets to handle</a></li>
                 <?php } ?> 
