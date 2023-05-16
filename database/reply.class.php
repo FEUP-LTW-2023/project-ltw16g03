@@ -43,7 +43,7 @@
           SELECT id, created_at, content, id_user
           FROM Reply 
           WHERE id_ticket = ?
-          ORDER by created_at desc
+          ORDER by created_at asc
         ');
   
         $stmt->execute(array($id_ticket));
@@ -66,6 +66,30 @@
         $stmt->execute();
         $id = $stmt->fetch();
         return intval($id['id']);
+      }
+
+      static function replyClient($ticketId, $userId, $replyText) {
+    
+            try {
+                global $dbh;
+                // Prepare and execute the update statement
+                $stmt = $dbh->prepare('INSERT INTO Reply (id_ticket, id_user, content) VALUES (:ticketId, :userId, :replyText)');
+                $stmt->bindParam(':ticketId', $ticketId, PDO::PARAM_INT);
+                $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+                $stmt->bindParam(':replyText', $replyText, PDO::PARAM_STR);
+                $stmt->execute();
+      
+                // Check if the update was successful
+                if ($stmt->rowCount() > 0) {
+                    return true; // Ticket agent updated successfully
+                } else {
+                    return false; // No ticket found with the given ID
+                }
+              
+            } catch (PDOException $e) {
+                echo 'Error updating ticket status: ' . $e->getMessage();
+                return false; // An error occurred while updating the ticket agent
+            }
       }
     }
 ?>

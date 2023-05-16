@@ -9,12 +9,12 @@ include_once("../database/reply.class.php");
 
 $_SESSION['ticketinfo'] = Ticket::getTicket(intval($_GET['id']));
 $depart = Department::getName($_SESSION['ticketinfo']['id_department']);
-$replies = Reply::getRepliesByTicket($dbh, $_SESSION['ticketinfo']['id']);
+$replies = Reply::getRepliesByTicket($dbh, intval($_SESSION['ticketinfo']['id']));
 $us = getUserna($_SESSION['ticketinfo']['id_user']);
 $ag = getUserna($_SESSION['ticketinfo']['id_agent']);
 
 $ticketId = $_SESSION['ticketinfo']['id'];
-$hashtags = Ticket::getTicketHashtags($dbh, $ticketId);
+$hashtags = Ticket::getTicketHashtags($dbh, intval($ticketId));
 
 
 drawHeader();
@@ -104,19 +104,19 @@ if($replies) {
 
 
 <?php
-if($_SESSION['userID'] == $_SESSION['ticketinfo']['id_agent'] || $_SESSION['userID'] == $_SESSION['ticketinfo']['id_user']):
-    if($_SESSION['ticketinfo']['ticket_status'] != 'Closed'):
+if((getUserID() == $_SESSION['ticketinfo']['id_agent'] || getUserID() == $_SESSION['ticketinfo']['id_user']) && $_SESSION['ticketinfo']['ticket_status'] != 'Closed'){
 ?>
-
     <h2>Reply to Ticket</h2>
     <form>
     <textarea id="reply" style="width: 100%; height: 100px"></textarea>
-    <input type="submit" value="Reply to Client" />
+    
+    <?php
+    echo '<button onclick="replyClientTicket()">Reply to client</button><hr />';
+    ?>
     </form>
 
 <?php
-    endif;
-endif;
+    }
 ?>
 
 
@@ -138,6 +138,26 @@ endif;
             }
         };
         xhr.send('ticketId=<?php echo $_GET['id']; ?>');
+    }
+
+    function replyClientTicket() {
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../actions/action_replyClient.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = xhr.responseText;
+                if (response === 'success') {
+                    // Reload the page without changing the URL
+                    window.location.reload(false);
+                } else {
+                    alert('Failed to reply ticket.');
+                }
+            }
+        };
+        var replyValue = encodeURIComponent(document.getElementById('reply').value);
+        xhr.send('ticketId=<?php echo $_GET['id']; ?>&reply=' + replyValue);
     }
 
     function closeTicket() {
