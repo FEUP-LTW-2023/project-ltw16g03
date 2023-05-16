@@ -30,7 +30,7 @@
       $stmt = $db->prepare('
         SELECT id, name
         FROM Department
-        ORDER by created_at desc
+        ORDER by name ASC
       ');
 
       $stmt->execute();

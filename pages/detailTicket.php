@@ -49,7 +49,9 @@ if (($_SESSION['ticketinfo']['id_agent'] == getUserID() || isAdmin(getUserID()))
     echo '<label>Change ticket department:</label>';
     echo '<select id="departmentSelect">';
     foreach ($departments as $department) {
-        echo '<option value="' . $department['id'] . '">' . $department['name'] . '</option>';
+        echo '<option value="' . $department['id'] . '" ' . ($department['name'] == $depart ? 'selected' : ''). '>';
+        echo $department['name'];
+        echo '</option>';
     }
     echo '</select>';
     echo '<button onclick=updateDepartment()>Change Department</button><br><br>';
@@ -107,13 +109,11 @@ if($replies) {
 if((getUserID() == $_SESSION['ticketinfo']['id_agent'] || getUserID() == $_SESSION['ticketinfo']['id_user']) && $_SESSION['ticketinfo']['ticket_status'] != 'Closed'){
 ?>
     <h2>Reply to Ticket</h2>
-    <form>
     <textarea id="reply" style="width: 100%; height: 100px"></textarea>
     
     <?php
     echo '<button onclick="replyClientTicket()">Reply to client</button><hr />';
     ?>
-    </form>
 
 <?php
     }
@@ -213,8 +213,6 @@ if((getUserID() == $_SESSION['ticketinfo']['id_agent'] || getUserID() == $_SESSI
         xhr.send('ticketId=' + ticketId + '&newDepartmentId=' + departmentId);
     }
 
-    // Attach the event listener to the button
-    document.getElementById('changeDepartmentBtn').addEventListener('click', updateDepartment);
 </script>
 
 
