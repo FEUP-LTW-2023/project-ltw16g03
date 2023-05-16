@@ -67,7 +67,5 @@
         $id = $stmt->fetch();
         return intval($id['id']);
       }
-
-
     }
 ?>

@@ -41,12 +41,8 @@ drawHeader();
 <br>
 
 <?php
-// Check if the ticket has no assigned agent and the user is an agent
-if ($ag == null && isAgent(getUserID())) {
-    echo '<button onclick="assignTicket()">Assign Ticket</button>';
-}
 
-if ($_SESSION['ticketinfo']['id_agent'] == getUserID() && $_SESSION['ticketinfo']['ticket_status'] != 'Closed') {
+if (($_SESSION['ticketinfo']['id_agent'] == getUserID() || isAdmin(getUserID())) && $_SESSION['ticketinfo']['ticket_status'] != 'Closed') {
     // Display the dropdown list of departments
     $departments = Department::getAll($dbh);
 
@@ -56,15 +52,20 @@ if ($_SESSION['ticketinfo']['id_agent'] == getUserID() && $_SESSION['ticketinfo'
         echo '<option value="' . $department['id'] . '">' . $department['name'] . '</option>';
     }
     echo '</select>';
-    echo '<button onclick=updateDepartment()>Change Department</button>';
+    echo '<button onclick=updateDepartment()>Change Department</button><br><br>';
+}
 
+// Check if the ticket has no assigned agent and the user is an agent
+if ($ag == null && isAgent(getUserID()) && $_SESSION['ticketinfo']['ticket_status'] != 'Closed') {
+    echo '<button onclick="assignTicket()">Assign Ticket</button><hr><br>';
 }
 ?>
+
 <br>
 <?php
-if ($_SESSION['ticketinfo']['id_agent'] == getUserID() && $_SESSION['ticketinfo']['ticket_status'] != 'Closed') {
+if (($_SESSION['ticketinfo']['id_agent'] == getUserID() || isAdmin(getUserID())) && $_SESSION['ticketinfo']['ticket_status'] != 'Closed') {
     echo '<button onclick="closeTicket()">Close this Ticket</button><hr />';
-}else if($_SESSION['ticketinfo']['id_agent'] == getUserID() && $_SESSION['ticketinfo']['ticket_status'] == 'Closed'){
+}else if (($_SESSION['ticketinfo']['id_agent'] == getUserID() || isAdmin(getUserID())) && $_SESSION['ticketinfo']['ticket_status'] == 'Closed'){
     echo '<button onclick="reopenTicket()">Reopen this Ticket</button><hr />';
 }
 ?>
