@@ -58,9 +58,21 @@ if (($_SESSION['ticketinfo']['id_agent'] == getUserID() || isAdmin(getUserID()))
 }
 
 // Check if the ticket has no assigned agent and the user is an agent
-if ($_SESSION['ticketinfo']['id_department'] == $_SESSION['userinfo']['id_department'] && $ag == null && isAgent(getUserID()) && $_SESSION['ticketinfo']['ticket_status'] != 'Closed') {
+if ($_SESSION['ticketinfo']['id_department'] == $_SESSION['userinfo']['id_department'] && isAgent(getUserID()) && $_SESSION['ticketinfo']['ticket_status'] != 'Closed') {
+    echo '<label>Assign Ticket to:</label>';
+    echo '<select id="agentDropdown">';
+    
+    // Assuming you have a PDO database connection established ($db)
+    $agents = Department::getAllAgentsDepartment($dbh, $_SESSION['ticketinfo']['id_department']);
+    
+    foreach ($agents as $agent) {
+        echo '<option value="' . $agent['id'] . '">' . $agent['username'] . '</option>';
+    }
+    
+    echo '</select>';
     echo '<button onclick="assignTicket()">Assign Ticket</button><hr><br>';
 }
+
 ?>
 
 <br>
@@ -122,23 +134,28 @@ if((getUserID() == $_SESSION['ticketinfo']['id_agent'] || getUserID() == $_SESSI
 
 <script>
     function assignTicket() {
-        // Call the updateTicketAgent function via an AJAX request
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '../actions/action_update_ticket_agent.php', true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var response = xhr.responseText;
-                if (response === 'success') {
-                    // Reload the page without changing the URL
-                    window.location.reload(false);
-                } else {
-                    alert('Failed to assign ticket.');
-                }
+    var agentDropdown = document.getElementById('agentDropdown');
+    var selectedAgentId = agentDropdown.value;
+
+    // Call the updateTicketAgent function via an AJAX request
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '../actions/action_update_ticket_agent.php', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = xhr.responseText;
+            if (response === 'success') {
+                // Reload the page without changing the URL
+                window.location.reload(false);
+            } else {
+                alert('Failed to assign ticket.');
             }
-        };
-        xhr.send('ticketId=<?php echo $_GET['id']; ?>');
-    }
+        }
+    };
+
+    xhr.send('ticketId=<?php echo $_GET['id']; ?>&agentId=' + selectedAgentId);
+}
+
 
     function replyClientTicket() {
         

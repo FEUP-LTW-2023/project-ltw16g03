@@ -238,7 +238,7 @@ static function updateTicketDepartment($ticketId, $newDepartmentId) {
           global $dbh;
 
           // Prepare and execute the update statement
-          $stmt = $dbh->prepare('UPDATE Ticket SET id_department = :newDepartmentId WHERE id = :ticketId');
+          $stmt = $dbh->prepare('UPDATE Ticket SET id_department = :newDepartmentId, id_agent = NULL WHERE id = :ticketId');
           $stmt->bindParam(':newDepartmentId', $newDepartmentId, PDO::PARAM_INT);
           $stmt->bindParam(':ticketId', $ticketId, PDO::PARAM_INT);
           $stmt->execute();

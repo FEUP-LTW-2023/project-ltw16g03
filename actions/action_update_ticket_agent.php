@@ -5,11 +5,11 @@ require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/../database/ticket.class.php');
 
 $ticketId = $_POST['ticketId'];
-$userId = getUserID();
+$agentId = $_POST['agentId'];
 $assig = 'Assigned';
 
 // Call the updateTicketAgent function
-$result = Ticket::updateTicketAgent($ticketId, $userId, $assig);
+$result = Ticket::updateTicketAgent($ticketId, $agentId, $assig);
 
 if ($result) {
     echo 'success';

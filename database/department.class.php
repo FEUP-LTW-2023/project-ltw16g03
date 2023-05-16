@@ -94,6 +94,19 @@
       }
     }
 
+    static function getAllAgentsDepartment(PDO $db, $departmentId) {
+      $stmt = $db->prepare('
+          SELECT *
+          FROM User
+          WHERE is_agent = true AND id_department = :departmentId
+      ');
+  
+      $stmt->bindParam(':departmentId', $departmentId, PDO::PARAM_INT);
+      $stmt->execute();
+      $agents = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $agents;
+  }  
+
   }
   
 ?>
