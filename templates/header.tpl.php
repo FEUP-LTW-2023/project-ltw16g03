@@ -9,8 +9,7 @@
 <html lang="en-US">
     <?php 
     require_once(__DIR__ . '/../database/user.class.php');
-    $isADMIN = isAdmin(getUserID());
-    $isAGENT = isAgent(getUserID());
+    $_SESSION['userinfo'] = getUser($_SESSION['username']);
     ?>
     <head>
         <title>HelpDesk - Trouble Tickets</title>
@@ -35,17 +34,15 @@
                 <li><a href="/pages/faq.php">FAQ</a></li>
                 <li><a href="/pages/aboutus.php">About us</a></li>
                 <?php
-                if($isADMIN==true){
+                if($_SESSION['userinfo']['is_admin']==true){
                 ?>
                 <li><a href="/pages/users.php">Users</a></li>
                 <?php } ?> 
                 <?php
-                if($isADMIN==true || $isAGENT==true){
+                if($_SESSION['userinfo']['is_admin']==true || $_SESSION['userinfo']['is_agent']==true){
                 ?>
                 <li><a href="/pages/tasks.php">My Tasks</a></li>
-                <?php if ($isAGENT) { ?>
-                    <li><a href="/pages/departmentTicket.php?id=<?php echo intval($_SESSION['userinfo']['id_department']); ?>">My Department</a></li>
-                <?php } ?>                
+                <li><a href="/pages/departmentTicket.php?id=<?php echo intval($_SESSION['userinfo']['id_department']); ?>">My Department</a></li>           
                 <li><a href="/pages/ticketAvailable.php">Tickets Available</a></li>
                 <li><a href="/pages/ticketsToHandle.php">My Tickets to handle</a></li>
                 <?php } ?> 
