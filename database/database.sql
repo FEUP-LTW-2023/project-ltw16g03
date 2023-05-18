@@ -12,14 +12,6 @@ DROP TABLE IF EXISTS Reply;
 
 --Tables
 
-/*  
-    As tabelas Client, Agent e Admin eram irrelevantes pois tudo o que faziam era redirecionar para esta tabela, eram apenas confortáveis
-    Qualquer user pode criar um ticket, não interessa se é client, agent ou admin.
-    Mas só agents ou admins podem fazer certas ações.ABORT
-    Se is_agent for true, id_department terá um valor
-    Ao verificar se um user tem permissões, primeiro ver se é admin, depois se é agent, caso não seja nenhum, é client
-*/
-
 CREATE TABLE User (
      id INTEGER PRIMARY KEY AUTOINCREMENT,
      username varchar(255) NOT NULL UNIQUE,
