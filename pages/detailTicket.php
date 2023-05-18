@@ -58,7 +58,7 @@ if (($_SESSION['ticketinfo']['id_agent'] == getUserID() || isAdmin(getUserID()))
 }
 
 // Check if the ticket has no assigned agent and the user is an agent
-if ($_SESSION['ticketinfo']['id_department'] == $_SESSION['userinfo']['id_department'] && isAgent(getUserID()) && $_SESSION['ticketinfo']['ticket_status'] != 'Closed') {
+if ((($_SESSION['ticketinfo']['id_department'] == $_SESSION['userinfo']['id_department'] && isAgent(getUserID())) || isAdmin(getUserID())) && $_SESSION['ticketinfo']['ticket_status'] != 'Closed') {
     echo '<label>Assign Ticket to:</label>';
     echo '<select id="agentDropdown">';
     
@@ -124,7 +124,7 @@ if((getUserID() == $_SESSION['ticketinfo']['id_agent'] || getUserID() == $_SESSI
     <textarea id="reply" style="width: 100%; height: 100px"></textarea>
     
     <?php
-    echo '<button onclick="replyClientTicket()">Reply to client</button><hr />';
+    echo '<button onclick="replyClientTicket()">Reply</button><hr />';
     ?>
 
 <?php

@@ -11,11 +11,9 @@
     public int $id_user;
     public int $id_agent;
     public int $id_department;
-    public string $feedback;
-    public string $client_answer;
     public array $hashtags;
     
-    public function __construct(int $id, string $title, string $description, string $ticket_status, datetime $created_at, datetime $updated_at, int $id_user, int $id_agent, int $id_department, string $feedback, string $client_answer, array $hashtags)
+    public function __construct(int $id, string $title, string $description, string $ticket_status, datetime $created_at, datetime $updated_at, int $id_user, int $id_agent, int $id_department, array $hashtags)
     {
         $this->id = $id;
         $this->title = $title;
@@ -26,8 +24,6 @@
         $this->id_user = $id_user;
         $this->id_agent = $id_agent;
         $this->id_department = $id_department;
-        $this->feedback = $feedback;
-        $this->client_answer = $client_answer;
         $this->hashtags = $hashtags;
     }
 
@@ -44,7 +40,7 @@
     static function get(int $id) : Ticket {
       global $dbh;
       $stmt = $dbh->prepare('
-        SELECT id, title, description, ticket_status, created_at, updated_at, id_user, id_agent, id_department, feedback, client_answer
+        SELECT id, title, description, ticket_status, created_at, updated_at, id_user, id_agent, id_department
         FROM Ticket 
         WHERE id = ?
       ');
@@ -62,8 +58,6 @@
         $ticket['id_user'],
         $ticket['id_agent'],
         $ticket['id_department'],
-        $ticket['feedback'],
-        $ticket['client_answer'],
         $ticket['hashtags']
       );
     }
@@ -168,7 +162,7 @@
     static function getTicket(int $id) {
       global $dbh;
     try {
-      $stmt = $dbh->prepare('SELECT id, title, description, ticket_status, id_department, id_agent, id_user, feedback, client_answer, created_at FROM Ticket WHERE id = ?');
+      $stmt = $dbh->prepare('SELECT id, title, description, ticket_status, id_department, id_agent, id_user, created_at FROM Ticket WHERE id = ?');
       $stmt->execute(array($id));
       return $stmt->fetch();
     
@@ -176,19 +170,6 @@
       return null;
     }
     }  
-
-    static function getTicketsByHashtag(PDO $db, string $hashtag) : array {
-      $stmt = $db->prepare('SELECT t.id, t.title, t.descriptions, t.ticket_status, t.created_at, t.updated_at, t.id_user, t.id_agent, t.id_department
-                            FROM Ticket AS t
-                            INNER JOIN Ticket_Hashtag AS th ON t.id = th.id_ticket
-                            INNER JOIN Hashtag AS h ON th.id_hashtag = h.id
-                            WHERE h.tag = ?');
-      $stmt->execute(array($hashtag));
-    
-      $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-      return $tickets;
-  }
   
   static function updateTicketAgent($ticketId, $agentId, $assig) {
     $userAgent = isAgent(getUserID());
