@@ -12,6 +12,7 @@ $depart = Department::getName($_SESSION['ticketinfo']['id_department']);
 $replies = Reply::getRepliesByTicket($dbh, intval($_SESSION['ticketinfo']['id']));
 $us = getUserna($_SESSION['ticketinfo']['id_user']);
 $ag = getUserna($_SESSION['ticketinfo']['id_agent']);
+$_SESSION['userinfo'] = getUser($_SESSION['username']);
 
 $ticketId = $_SESSION['ticketinfo']['id'];
 $hashtags = Ticket::getTicketHashtags($dbh, intval($ticketId));
