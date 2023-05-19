@@ -13,19 +13,15 @@
     ?>
     <head>
         <title>HelpDesk - Trouble Tickets</title>
-        <link rel="stylesheet" href="../css/ticketpage.css">
-        <link rel="stylesheet" href="../css/common.css"> 
-        <link rel="stylesheet" href="../css/novo_ticket.css"> 
-        <link rel="stylesheet" href="../css/login.css"> 
-        <link rel="stylesheet" href="../css/register.css">
+        <link rel="stylesheet" href="../css/style.css"> 
         <script src="../javascript/script.js" defer></script>
     </head>
     <body>
         <header>
             <h1><a href = "/pages/ticketpage.php">HelpDesk</a></h1>
             <section class="logout-edit">
-                <a href="../actions/action_logout.php"><button id="logout">Logout</button></a>
                 <a href="/pages/profile.php"><button id="logout">Profile</button></a>
+                <a href="../actions/action_logout.php"><button id="logout">Logout</button></a>
             </section>
             <nav>
             <ul>
