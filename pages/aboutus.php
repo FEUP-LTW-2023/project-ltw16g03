@@ -1,4 +1,11 @@
 <?php
+
+require_once(__DIR__ . '/../utils/init.php');
+
+  if(!isset($_SESSION['username'])){
+    header("Location:/index.php");
+  }
+
   declare(strict_types = 1);
   require_once(__DIR__ . '/../templates/header.tpl.php');
   require_once(__DIR__ . '/../templates/footer.tpl.php');

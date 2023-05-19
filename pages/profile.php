@@ -1,5 +1,9 @@
 <?php
-    include_once(__DIR__.'/../includes/init.php');
+    require_once(__DIR__ . '/../utils/init.php');
+
+    if(!isset($_SESSION['username'])){
+      header("Location:/index.php");
+    }
     require_once(__DIR__ . '/../templates/header.tpl.php');
     require_once(__DIR__ . '/../templates/footer.tpl.php');
     include_once("../database/user.class.php");
