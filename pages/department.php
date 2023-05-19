@@ -13,9 +13,16 @@
 
   $isADMIN = isAdmin(getUserID());
  
-  $departments = Department::getDepartments($dbh, 14);
+
+  $page = isset($_GET['page']) ? $_GET['page'] : 1;
+  $perPage = 7;
+  $startId = ($page - 1) * $perPage + 1;
+  $endId = $startId + $perPage - 1;
+
+  $departments = Department::getDepartmentsWithinRange($dbh, $startId, $endId);
 
   drawHeader();
   drawDepartments($departments, $isADMIN);
+  Department::drawPagination($page, $perPage, $dbh);
   drawFooter();
 ?>

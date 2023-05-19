@@ -38,6 +38,49 @@
       return $row;
     }
 
+    static function getDepartmentsWithinRange(PDO $db, int $startId, int $endId) : array {
+      $stmt = $db->prepare('SELECT id, name FROM Department WHERE id BETWEEN ? AND ?');
+      $stmt->execute(array($startId, $endId));
+
+      $departments = array();
+      while ($department = $stmt->fetch()) {
+          $departments[] = new Department(
+              intval($department['id']),
+              $department['name']
+          );
+      }
+
+      return $departments;
+  }
+
+  static function getTotalDepartments(PDO $db): int {
+    $stmt = $db->query('SELECT COUNT(*) as total FROM Department');
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return intval($result['total']);
+  }
+
+
+  static function drawPagination($currentPage, $perPage, PDO $db) {
+    $totalDepartments = Department::getTotalDepartments($db);
+    $totalPages = ceil($totalDepartments / $perPage);
+
+    echo '<div class="pagination">';
+    if ($currentPage > 1) {
+        echo '<a href="?page=' . ($currentPage - 1) . '">Previous</a>';
+    }
+    for ($i = 1; $i <= $totalPages; $i++) {
+        echo '<a href="?page=' . $i . '"';
+        if ($i === $currentPage) {
+            echo ' class="active"';
+        }
+        echo '>' . $i . '</a>';
+    }
+    if ($currentPage < $totalPages) {
+        echo '<a href="?page=' . ($currentPage + 1) . '">Next</a>';
+    }
+    echo '</div>';
+  }
+
     static function searchDepartments(PDO $db, string $search, int $count) : array {
       $stmt = $db->prepare('SELECT id, name FROM Department WHERE name LIKE ? LIMIT ?');
       $stmt->execute(array($search . '%', $count));
