@@ -13,7 +13,7 @@
 
   $isADMIN = isAdmin(getUserID());
  
-  $departments = Department::getDepartments($dbh, 8);
+  $departments = Department::getDepartments($dbh, 14);
 
   drawHeader();
   drawDepartments($departments, $isADMIN);

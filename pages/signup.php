@@ -17,7 +17,7 @@ drawHeader();
                 <span class="hint">One uppercase, 1 symbol, 1 number, at least 6 characters.</span>
                 <input name="passwordagain" class="w3-input w3-border" type="password" placeholder="Repeat Password">
                 <span class="hint">Must match new password.</span>
-                <input name="Submit" class="w3-input w3-border" type="submit" value="Next">
+                <input name="Submit" class="w3-input w3-border" type="submit" value="SignUp">
             </form>
             <p> <?php echo htmlentities($error) ?> </p>
     <p>Already have an account? <a href="/pages/login.php">Login here</a>.</p>

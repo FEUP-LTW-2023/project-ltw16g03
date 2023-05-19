@@ -7,7 +7,7 @@
   require_once(__DIR__ . '/../database/department.class.php');
 
 
-  $departments = Department::searchDepartments($dbh, $_GET['search'], 8);
+  $departments = Department::searchDepartments($dbh, $_GET['search'], 14);
 
   echo json_encode($departments);
 ?>
