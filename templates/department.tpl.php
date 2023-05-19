@@ -39,13 +39,6 @@ function drawDepartment(Department $department, array $tickets, array $hashtags)
       <option value="Assigned">Assigned</option>
       <option value="Closed">Closed</option>
     </select>
-    <label for="hashtags">Hashtags:</label>
-    <?php for ($i = 0; $i < count($hashtags); $i++) { ?>
-      <div>
-        <input type="checkbox" name="hashtags[]" value="<?= $hashtags[$i]['id'] ?>"> <?= $hashtags[$i]['tag'] ?>
-        <label for="hashtag<?= $hashtag['id'] ?>"><?= $hashtag['tag'] ?></label>
-      </div>
-    <?php } ?>    
 
     <input type="submit" value="Apply Filter">
     <input type="button" value="Reset Filter" onclick="location.href='departmentTicket.php?id=<?= $_GET['id'] ?>'">

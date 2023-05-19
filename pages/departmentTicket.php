@@ -28,15 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($status !== 'all') {
     $tickets = Ticket::filterByStatus($dbh, intval($_GET['id']), $status);
   }
-  
-  // Filter by hashtags
-  /*$selectedHashtags = $_POST['hashtags'];
-  echo "Selected Hashtags: ";
-  print_r($selectedHashtags);
-  echo "<br>";
-  if (!empty($selectedHashtags)) {
-    $tickets = Ticket::filterByHashtags($dbh, intval($_GET['id']), $selectedHashtags);
-  }*/
 }
 
 drawHeader();
