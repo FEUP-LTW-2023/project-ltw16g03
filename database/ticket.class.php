@@ -62,6 +62,31 @@
       );
     }
 
+    public static function filterByStatus($dbh, $departmentId, $status) {
+      $stmt = $dbh->prepare("SELECT * FROM Ticket WHERE id_department = :departmentId AND ticket_status = :status");
+      $stmt->bindParam(':departmentId', $departmentId, PDO::PARAM_INT);
+      $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+      $stmt->execute();
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+  
+    public static function filterByHashtags($dbh, $departmentId, $hashtags) {
+      $query = "SELECT DISTINCT t.* FROM Ticket t
+                JOIN Ticket_Hashtag th ON t.id = th.id_ticket
+                JOIN Hashtag h ON th.id_hashtag = h.id
+                WHERE t.id_department = :departmentId AND h.tag IN (";
+      $placeholders = rtrim(str_repeat('?,', count($hashtags)), ',');
+      $query .= $placeholders . ")";
+  
+      $stmt = $dbh->prepare($query);
+      $stmt->bindValue(':departmentId', $departmentId, PDO::PARAM_INT);
+      foreach ($hashtags as $index => $hashtag) {
+        $stmt->bindValue($index + 1, $hashtag, PDO::PARAM_STR);
+      }
+      $stmt->execute();
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     static function getAll(PDO $db){
       $stmt = $db->prepare('
         SELECT id, title, description, id_department, ticket_status

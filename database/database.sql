@@ -158,7 +158,7 @@ INSERT INTO Hashtag (tag) VALUES ('#scam'); --2
 INSERT INTO Hashtag (tag) VALUES ('#cant_pay'); --3
 INSERT INTO Hashtag (tag) VALUES ('#help'); --4
 INSERT INTO Hashtag (tag) VALUES ('#doesnt_work'); --5
-INSERT INTO Hashtag (tag) VALUES ('#department?'); --6
+INSERT INTO Hashtag (tag) VALUES ('#department'); --6
 INSERT INTO Hashtag (tag) VALUES ('#urgent'); --7
 INSERT INTO Hashtag (tag) VALUES ('#problem'); --8
 INSERT INTO Hashtag (tag) VALUES ('#seen_better'); --9
