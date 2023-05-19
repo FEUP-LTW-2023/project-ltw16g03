@@ -182,7 +182,7 @@ function updateUserInfo($id, $firstName, $lastName, $username, $email){
 
   function getAll(PDO $db){
     $stmt = $db->prepare('
-      SELECT id, username
+      SELECT id, username, id_department, is_agent, is_admin
       FROM User 
       ORDER by username
     ');
