@@ -43,29 +43,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $filteredTickets = array_merge($filteredTickets, $hashtagTickets);
       echo count($filteredTickets);
     }
-    
+
     // If both filters are applied, use intersection to get common tickets
     if (!empty($filteredTickets)) {
-      // Remove duplicates from the tickets array
-      $uniqueTickets = [];
-      foreach ($tickets as $ticket) {
-        if (!in_array($ticket, $uniqueTickets)) {
-          $uniqueTickets[] = $ticket;
-        }
-      }
-      $filteredTickets = $uniqueTickets;
+      // Filter the tickets array with the filteredTickets array
       $tickets = array_intersect($filteredTickets, $tickets);
     } else {
       $tickets = [];
     }
-  
-    // Print selected hashtag IDs
-    echo "<h4>Selected Hashtag IDs:</h4>";
-    echo "<ul>";
-    foreach ($hashtagIds as $hashtagId) {
-      echo "<li>$hashtagId</li>";
-    }
-    echo "</ul>";
   }
 }
 
