@@ -5,19 +5,21 @@ Projects for the Web Languages and Technologies (LTW) class to develop a website
 The project name is HelpDesk.
 
 ## URL index
+```sh
 http://localhost:9000/pages/index.php
+```
 
 ## Login Data
 # Admin
-username -> Manuel
+username -> Manuel<br>
 password -> Pass*word1
 
 # Agent
-username -> Ze
+username -> Ze<br>
 password -> Pass*word1
 
 # Client
-username -> Rafa
+username -> Rafa<br>
 password -> Pass*word1
 
 ## Students Info
