@@ -123,6 +123,14 @@
       return intval($id['id']);
     }
 
+    static function getDepartName(PDO $db, $departmentId) {
+          $stmt = $db->prepare('SELECT name FROM Department WHERE id = :id');
+          $stmt->bindValue(':id', $departmentId, PDO::PARAM_INT);
+          $stmt->execute();
+          $result = $stmt->fetch(PDO::FETCH_ASSOC);
+          return $result['name'];
+      }
+
     static function getName($id) {
       global $dbh;
       try {
