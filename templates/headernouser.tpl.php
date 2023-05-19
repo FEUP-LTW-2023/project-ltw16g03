@@ -9,11 +9,7 @@
 <html lang="en-US">
     <head>
         <title>HelpDesk - Trouble Tickets</title>
-        <link rel="stylesheet" href="../css/ticketpage.css">
-        <link rel="stylesheet" href="../css/common.css"> 
-        <link rel="stylesheet" href="../css/novo_ticket.css"> 
-        <link rel="stylesheet" href="../css/login.css"> 
-        <link rel="stylesheet" href="../css/register.css">
+        <link rel="stylesheet" href="../css/style.css">
         <script src="../javascript/script.js" defer></script>
     </head>
     <body>

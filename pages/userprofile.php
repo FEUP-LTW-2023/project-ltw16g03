@@ -11,31 +11,31 @@
     include_once("../database/user.class.php");
     include_once("../database/department.class.php");
 
-    $_SESSION['userinfo'] = getUserAdmin(intval($_GET['id']));
-    $depart = Department::getName($_SESSION['userinfo']['id_department']);
+    $_SESSION['userinf'] = getUserAdmin(intval($_GET['id']));
+    $depart = Department::getName($_SESSION['userinf']['id_department']);
 
     drawHeader();
 ?>
 
-<h1>Profile of <?php echo htmlentities($_SESSION['userinfo']['username']) ?></h1>
+<h1>Profile of <?php echo htmlentities($_SESSION['userinf']['username']) ?></h1>
 
 <label>- First Name:</label>
-<h3><?php echo htmlentities($_SESSION['userinfo']['firstName']) ?></h3>
+<h3><?php echo htmlentities($_SESSION['userinf']['firstName']) ?></h3>
 <label>- Last Name:</label>
-<h3><?php echo htmlentities($_SESSION['userinfo']['lastName']) ?></h3>
+<h3><?php echo htmlentities($_SESSION['userinf']['lastName']) ?></h3>
 <label>- Username:</label>
-<h3><?php echo htmlentities($_SESSION['userinfo']['username']) ?></h3>
+<h3><?php echo htmlentities($_SESSION['userinf']['username']) ?></h3>
 <label>- Email:</label>
-<h3><?php echo htmlentities($_SESSION['userinfo']['email']) ?></h3>
+<h3><?php echo htmlentities($_SESSION['userinf']['email']) ?></h3>
 <label>- Department:</label>
 <?php
-if(($_SESSION['userinfo']['is_agent'] == true || $_SESSION['userinfo']['is_admin'] == true) && $_SESSION['userinfo']['id_department'] != null){
+if(($_SESSION['userinf']['is_agent'] == true || $_SESSION['userinf']['is_admin'] == true) && $_SESSION['userinf']['id_department'] != null){
 ?>
 <h3><?php echo htmlentities($depart) ?>
 <br>
 <br>
 <?php
-if ($_SESSION['userinfo']['is_agent'] == true || $_SESSION['userinfo']['is_admin'] == true) {
+if ($_SESSION['userinf']['is_agent'] == true || $_SESSION['userinf']['is_admin'] == true) {
     // Display the dropdown list of departments
     $departments = Department::getAll($dbh);
 
@@ -50,7 +50,7 @@ if ($_SESSION['userinfo']['is_agent'] == true || $_SESSION['userinfo']['is_admin
 }
 ?>
 </h3>
-<?php }else if (($_SESSION['userinfo']['is_agent'] == true || $_SESSION['userinfo']['is_admin'] == true) && $_SESSION['userinfo']['id_department'] == null){?>
+<?php }else if (($_SESSION['userinf']['is_agent'] == true || $_SESSION['userinf']['is_admin'] == true) && $_SESSION['userinf']['id_department'] == null){?>
 <h3>
 <?php 
 echo htmlentities("This user doesn't have a department");?><br>
@@ -76,26 +76,26 @@ echo htmlentities("This user is not an agent or admin to have a department")
 <label>- Agent:</label>
 <h3>
 <?php 
-if($_SESSION['userinfo']['is_agent']==true){
+if($_SESSION['userinf']['is_agent']==true){
     echo htmlentities("This user is an agent");
 }else{
     echo htmlentities("This user is not an agent");
 }
 
-if($_SESSION['userinfo']['is_agent']==false){
+if($_SESSION['userinf']['is_agent']==false){
     echo '<button onclick="updateUserToAgent()">Update user to agent</button>';
-}else if($_SESSION['userinfo']['is_agent']==true && $_SESSION['userinfo']['is_admin']==false){
+}else if($_SESSION['userinf']['is_agent']==true && $_SESSION['userinf']['is_admin']==false){
     echo '<button onclick="updateUserFromAgent()">Demote agent to normal user</button>';
 }
 ?></h3>
 <label>- Admin:</label>
 <h3>
-<?php if($_SESSION['userinfo']['is_admin']==true){
+<?php if($_SESSION['userinf']['is_admin']==true){
     echo htmlentities("This user is an admin");
 }else{
     echo htmlentities("This user is not an admin");
 }
-if($_SESSION['userinfo']['is_admin']==false){
+if($_SESSION['userinf']['is_admin']==false){
     echo '<button onclick="updateUserToAdmin()">Update user to admin</button>';
 }
 
