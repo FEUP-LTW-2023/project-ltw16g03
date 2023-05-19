@@ -306,6 +306,29 @@ static function reopenTicket($ticketId, $assig) {
   }
 }
 
+public static function filterByHashtag($dbh, $id, $hashtagId) {
+  // Prepare the SQL statement to retrieve tickets based on hashtag ID
+  $stmt = $dbh->prepare("
+    SELECT t.*
+    FROM Ticket t
+    INNER JOIN Ticket_Hashtag th ON t.id = th.id_ticket
+    WHERE t.id_department = :id AND th.id_hashtag = :hashtag_id
+  ");
+
+  // Bind the parameters
+  $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+  $stmt->bindParam(':hashtag_id', $hashtagId, PDO::PARAM_INT);
+
+  // Execute the query
+  $stmt->execute();
+
+  // Fetch the matching tickets as an associative array
+  $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  // Return the tickets
+  return $tickets;
+}
+
 static function getTicketsWithoutAgent(PDO $db, int $id_department){
   $stmt = $db->prepare('
     SELECT id, title, description, id_department, id_agent

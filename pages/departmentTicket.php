@@ -21,14 +21,55 @@ $tickets = Ticket::getTicketsbyDepartment($dbh, intval($_GET['id']));
 require_once(__DIR__ . '/../database/hashtag.class.php');
 $hashtags = Hashtag::getAll($dbh);
 
-// Check if filter form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Filter by status
   $status = $_POST['status'];
   if ($status !== 'all') {
     $tickets = Ticket::filterByStatus($dbh, intval($_GET['id']), $status);
   }
+
+  if (isset($_POST['hashtags']) && is_array($_POST['hashtags']) && count($_POST['hashtags']) > 0) {
+    $hashtagIds = $_POST['hashtags'];
+
+    // Create an empty array to store the filtered tickets
+    $filteredTickets = [];
+
+    // Iterate through each hashtag ID
+    foreach ($hashtagIds as $hashtagId) {
+      // Get the tickets for the current hashtag ID
+      $hashtagTickets = Ticket::filterByHashtag($dbh, intval($_GET['id']), $hashtagId);
+      
+      // Merge the tickets with the filteredTickets array
+      $filteredTickets = array_merge($filteredTickets, $hashtagTickets);
+      echo count($filteredTickets);
+    }
+    
+    // If both filters are applied, use intersection to get common tickets
+    if (!empty($filteredTickets)) {
+      // Remove duplicates from the tickets array
+      $uniqueTickets = [];
+      foreach ($tickets as $ticket) {
+        if (!in_array($ticket, $uniqueTickets)) {
+          $uniqueTickets[] = $ticket;
+        }
+      }
+      $filteredTickets = $uniqueTickets;
+      $tickets = array_intersect($filteredTickets, $tickets);
+    } else {
+      $tickets = [];
+    }
+  
+    // Print selected hashtag IDs
+    echo "<h4>Selected Hashtag IDs:</h4>";
+    echo "<ul>";
+    foreach ($hashtagIds as $hashtagId) {
+      echo "<li>$hashtagId</li>";
+    }
+    echo "</ul>";
+  }
 }
+
+
 
 drawHeader();
 drawDepartment($department, $tickets, $hashtags);

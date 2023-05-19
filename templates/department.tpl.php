@@ -1,7 +1,9 @@
 <?php 
   declare(strict_types = 1); 
 
-  require_once(__DIR__ . '/../database/department.class.php')
+  require_once(__DIR__ . '/../database/department.class.php');
+  require_once(__DIR__ . '/../actions/getAll_hashtags.php');
+
 ?>
 
 <?php function drawdepartments(array $departments, bool $isADMIN) { ?>
@@ -40,6 +42,16 @@ function drawDepartment(Department $department, array $tickets, array $hashtags)
       <option value="Closed">Closed</option>
     </select>
 
+    <label for="hashtags">Filter by Hashtags:</label>
+    <?php
+    require_once(__DIR__ . '/../actions/getAll_hashtags.php');
+    for ($i = 0; $i < count($hashtags); $i++) {
+    ?>
+      <input type="checkbox" name="hashtags[]" value="<?= $hashtags[$i]['id'] ?>"> <?= $hashtags[$i]['tag'] ?>
+    <?php
+    }
+    ?>
+
     <input type="submit" value="Apply Filter">
     <input type="button" value="Reset Filter" onclick="location.href='departmentTicket.php?id=<?= $_GET['id'] ?>'">
   </form>
@@ -60,11 +72,12 @@ function drawDepartment(Department $department, array $tickets, array $hashtags)
       <h3><?= $title_t ?></h3>
       <p><?= $description_t ?></p>
       <p>-- <?= $status_t ?> --</p>
-      <a href="../pages/detailTicket.php?id=<?= $ticket['id'] ?>" class="button">Detalhes</a>
+      <a href="../pages/detailTicket.php?id=<?= $ticket['id'] ?>" class="button">Details</a>
     </div>
     <?php } ?>
   </section>
 <?php
 }
 ?>
+
 
