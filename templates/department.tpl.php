@@ -7,22 +7,20 @@
 ?>
 
 <?php function drawdepartments(array $departments, bool $isADMIN) { ?>
-  <section id = "department">
+  <section id="department">
     <header>
       <h2>Departments</h2>
+      <div class="add-department-container">
+        <?php if ($isADMIN == true) { ?>
+          <a href="/pages/novo_department.php" class="buttondepar">Add Department</a>
+        <?php } ?>
+      </div>
       <input id="searchdepartment" type="text" placeholder="search" onchange> 
     </header>
   </section>
-    <?php
-    if($isADMIN==true){
-    ?>
-      <a href="/pages/novo_department.php" class="buttondepar">Add Department</a>
-    <?php
-    }?>
   <section id="departments">
-    <?php foreach($departments as $department) { ?> 
-      <article>
-        <img src="https://picsum.photos/id/1/200/300?<?=$department->id?>">
+    <?php foreach ($departments as $department) { ?> 
+      <article class="fade-box">
         <a href="../pages/departmentTicket.php?id=<?=$department->id?>"><?=$department->name?></a>
       </article>
     <?php } ?>

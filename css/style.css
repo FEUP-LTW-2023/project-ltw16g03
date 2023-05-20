@@ -847,3 +847,25 @@ body>main>section.tickets>h2>a {
 .apply-button {
   margin-right: 5px;
 }
+
+.fade-box {
+  background: linear-gradient(to bottom, rgb(89, 152, 255), #0066ff);
+  transition: background-color 0.3s ease-in-out;
+  padding: 50px;
+}
+
+.fade-box:hover {
+  background: linear-gradient(to bottom, #2E5984, #0000bb);
+}
+
+.fade-box a {
+  color: white;
+}
+
+.add-department-container {
+  text-align: right;
+}
+
+.add-department-container a {
+  transition: color 0.3s ease-in-out;
+}
