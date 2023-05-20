@@ -759,3 +759,91 @@ body>main>section.tickets>h2>a {
   .pagination a:hover:not(.active) {
     background-color: #ddd;
   }
+
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 200px;
+  }
+
+  /* Custom styles for buttons */
+  button {
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    margin-left: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .ticket-form .hashtag-label {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    border: 1px solid #00008B;
+    border-radius: 5px;
+    color: #00008B;
+    cursor: pointer;
+}
+
+.ticket-form .hashtag-label.selected {
+    background-color: #00008B;
+    color: #fff;
+}
+
+.ticket-form input[type="checkbox"] {
+    display: none;
+}
+
+.hashtag-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hashtag-label {
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 2px 8px;
+  border: 1px solid #00008B;
+  border-radius: 5px;
+  color: #00008B;
+  cursor: pointer;
+}
+
+.hashtag-label.selected {
+  background-color: #00008B;
+  color: #ffffff;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.apply-button,
+.reset-button {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #2E5984;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.apply-button {
+  margin-right: 5px;
+}

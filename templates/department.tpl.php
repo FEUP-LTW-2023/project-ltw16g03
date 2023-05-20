@@ -42,20 +42,26 @@ function drawDepartment(Department $department, array $tickets, array $hashtags)
       <option value="Assigned">Assigned</option>
       <option value="Closed">Closed</option>
     </select>
-
+  
     <label for="hashtags">Filter by Hashtags:</label>
-    <?php
-    require_once(__DIR__ . '/../actions/getAll_hashtags.php');
-    for ($i = 0; $i < count($hashtags); $i++) {
-    ?>
-      <input type="checkbox" name="hashtags[]" value="<?= $hashtags[$i]['id'] ?>"> <?= $hashtags[$i]['tag'] ?>
-    <?php
-    }
-    ?>
-
-    <input type="submit" value="Apply Filter">
-    <input type="button" value="Reset Filter" onclick="location.href='departmentTicket.php?id=<?= $_GET['id'] ?>'">
+    <div class="hashtag-container">
+      <?php
+      require_once(__DIR__ . '/../actions/getAll_hashtags.php');
+      for ($i = 0; $i < count($hashtags); $i++) {
+        ?>
+        <input type="checkbox" name="hashtags[]" value="<?= $hashtags[$i]['id'] ?>">
+        <label class="hashtag-label"><?= $hashtags[$i]['tag'] ?></label>
+        <?php
+      }
+      ?>
+    </div>
+  
+    <div class="button-container">
+      <input type="submit" value="Apply Filter" class="apply-button">
+      <input type="button" value="Reset Filter" onclick="location.href='departmentTicket.php?id=<?= $_GET['id'] ?>'" class="reset-button">
+    </div>
   </form>
+  
 
   <section id="tickets">
     <?php 
@@ -82,3 +88,23 @@ function drawDepartment(Department $department, array $tickets, array $hashtags)
 ?>
 
 
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('input[name="hashtags[]"]');
+    const labels = document.querySelectorAll('.hashtag-label');
+
+    checkboxes.forEach(function(checkbox, index) {
+      checkbox.style.display = 'none'; // Hide the checkboxes
+
+      checkbox.addEventListener('change', function() {
+        labels[index].classList.toggle('selected'); // Toggle the 'selected' class on label click
+      });
+
+      labels[index].addEventListener('click', function() {
+        checkbox.checked = !checkbox.checked; // Toggle checkbox state on label click
+        labels[index].classList.toggle('selected'); // Toggle the 'selected' class on label click
+      });
+    });
+  });
+</script>
