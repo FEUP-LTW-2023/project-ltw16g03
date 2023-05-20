@@ -7,17 +7,18 @@
 ?>
 
 <?php function drawdepartments(array $departments, bool $isADMIN) { ?>
-  <header>
-    <h2>Departments
+  <section id = "department">
+    <header>
+      <h2>Departments</h2>
+      <input id="searchdepartment" type="text" placeholder="search" onchange> 
+    </header>
+  </section>
     <?php
     if($isADMIN==true){
-  ?>
-    <a href="/pages/novo_department.php" class="button">Add Department</a>
-  <?php
-  }?>
-    </h2>
-    <input id="searchdepartment" type="text" placeholder="search" onchange> 
-  </header>
+    ?>
+      <a href="/pages/novo_department.php" class="buttondepar">Add Department</a>
+    <?php
+    }?>
   <section id="departments">
     <?php foreach($departments as $department) { ?> 
       <article>

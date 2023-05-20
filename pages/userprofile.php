@@ -81,7 +81,9 @@ if($_SESSION['userinf']['is_agent']==true){
 }else{
     echo htmlentities("This user is not an agent");
 }
-
+?>
+<br>
+<?php
 if($_SESSION['userinf']['is_agent']==false){
     echo '<button onclick="updateUserToAgent()">Update user to agent</button>';
 }else if($_SESSION['userinf']['is_agent']==true && $_SESSION['userinf']['is_admin']==false){
@@ -95,6 +97,9 @@ if($_SESSION['userinf']['is_agent']==false){
 }else{
     echo htmlentities("This user is not an admin");
 }
+?>
+<br>
+<?php
 if($_SESSION['userinf']['is_admin']==false){
     echo '<button onclick="updateUserToAdmin()">Update user to admin</button>';
 }

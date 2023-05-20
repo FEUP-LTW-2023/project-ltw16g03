@@ -1,5 +1,5 @@
 header {
-    background-color: #007bff;
+    background-color: #2E5984;
     color: #fff;
     padding: 20px;
 }
@@ -44,7 +44,7 @@ footer {
 }
 
 #logout {
-    background-color: #007bff;
+    background-color: #2E5984;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -57,7 +57,7 @@ footer {
 }
 
 #logout:hover {
-    background-color: #0056b3;
+    background-color: #00008B;
 }
 
 body>header>h1>a {
@@ -75,37 +75,8 @@ label {
     font-weight: bold;
 }
 
-/*input[type="text"],
-input[type="password"],
-input[type="email"] {
-    display: inline-block;
-    width: 250px;
-    padding: 5px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-input[type="submit"] {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:hover {
-    background-color: #007bff;
-}*/
-
 nav {
-    background-color: #007bff;
+    background-color: #2E5984;
     padding: 10px;
 }
 
@@ -260,19 +231,19 @@ ul {
 .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #2E5984;
     color: #fff;
     text-decoration: none;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;    
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #00008B;
 }
 
 body>main>section.tickets>h2>a {
-    background-color: #007bff;
+    background-color: #2E5984;
     /* Cor de fundo do botão */
     color: #fff;
     /* Cor do texto do botão */
@@ -318,13 +289,16 @@ body>main>section.tickets>h2>a {
   }
   
   h2 a.button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
+    padding: 8px 16px;
+    background-color: #2E5984;
+    color: white;
     border: none;
-    border-radius: 4px;
     text-decoration: none;
-    margin-left: 10px;
+    float: right; 
+  }
+
+  h2 a.button:hover {
+    background-color: #00008B;
   }
   
   #searchdepartment {
@@ -357,7 +331,7 @@ body>main>section.tickets>h2>a {
   }
   
   article a {
-    color: #007bff;
+    color: #2E5984;
     text-decoration: none;
   }
   
@@ -368,7 +342,7 @@ body>main>section.tickets>h2>a {
   .ticket a.button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #2E5984;
     color: #fff;
     text-decoration: none;
     border-radius: 4px;
@@ -376,7 +350,7 @@ body>main>section.tickets>h2>a {
   }
   
   .ticket a.button:hover {
-    background-color: #0056b3;
+    background-color: #00008B;
   }
   
   h3 {
@@ -716,7 +690,6 @@ body>main>section.tickets>h2>a {
   }
   
   .buttonprof {
-    display: inline-block;
     padding: 6px 10px;
     font-size: 21px; 
     background-color: #2E5984;
@@ -728,4 +701,61 @@ body>main>section.tickets>h2>a {
   
   .buttonprof:hover {
     background-color: #00008B;
+  }
+
+  #edit_profile .register_form input[type="submit"] {
+    padding: 8px 16px;
+    background-color: #2E5984;
+    color: white;
+    border: none;
+    text-decoration: none;
+  }
+  
+  #edit_profile .register_form input[type="submit"]:hover {
+    background-color: #00008B;
+  }
+
+  .buttondepar{
+    padding: 6px 10px;
+    font-size: 21px; 
+    background-color: #2E5984;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    float: right; 
+  }
+  
+  .buttondepar:hover {
+    background-color: #00008B;
+  }
+
+  #department header {
+    background-color: #2E5984;
+    color: #fff;
+    padding: 20px;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination a {
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 5px;
+  }
+  
+  .pagination a.active {
+    background-color: #00008B;
+    color: white;
+  }
+  
+  .pagination a:hover:not(.active) {
+    background-color: #ddd;
   }

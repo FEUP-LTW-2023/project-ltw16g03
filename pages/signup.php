@@ -21,7 +21,7 @@ drawHeader();
             </form>
             <p> <?php echo htmlentities($error) ?> </p>
     <p>Already have an account? <a href="/pages/login.php">Login here</a>.</p>
-    </section>
+</section>
 
 <?php
   drawFooter();
