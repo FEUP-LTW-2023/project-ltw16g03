@@ -9,6 +9,12 @@ The project name is HelpDesk.
 http://localhost:9000/pages/index.php
 ```
 
+### Commands to execute the project
+Make sure you are in the project's folder and run the following command:
+```sh
+php -S localhost:9000
+```
+
 ### Login Data
 #### Admin
 username -> Manuel<br>
