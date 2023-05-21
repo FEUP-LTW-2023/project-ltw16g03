@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hashtagIds = $_POST['hashtags'];
 
     // Create an empty array to store the filtered tickets
-    $filteredTickets = [];
+    $filteredTickets = $tickets;
 
     // Iterate through each hashtag ID
     foreach ($hashtagIds as $hashtagId) {
@@ -40,13 +40,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $hashtagTickets = Ticket::filterByHashtag($dbh, intval($_GET['id']), $hashtagId);
       
       // Merge the tickets with the filteredTickets array
-      $filteredTickets = array_merge($filteredTickets, $hashtagTickets);
-      echo count($filteredTickets);
+      $filteredTickets = array_intersect($hashtagTickets, $filteredTickets);
     }
 
     // If both filters are applied, use intersection to get common tickets
     if (!empty($filteredTickets)) {
-      // Filter the tickets array with the filteredTickets array
+       //Filter the tickets array with the filteredTickets array
       $tickets = array_intersect($filteredTickets, $tickets);
     } else {
       $tickets = [];

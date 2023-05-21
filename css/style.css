@@ -869,3 +869,101 @@ body>main>section.tickets>h2>a {
 .add-department-container a {
   transition: color 0.3s ease-in-out;
 }
+
+/* Adjustments for smartphones */
+@media (max-width: 480px) {
+  header {
+    padding: 5px;
+  }
+  
+  header h1 {
+    font-size: 1.8rem;
+  }
+  
+  body {
+    padding-bottom: 3rem;
+  }
+  
+  main {
+    margin: 10px auto;
+    padding: 10px;
+  }
+  
+  footer {
+    padding: 2%;
+  }
+  
+  #login {
+    max-width: 100%;
+  }
+  
+  .ticket-form {
+    margin-bottom: 10px;
+  }
+  
+  .ticket-form h2 {
+    font-size: 1.6rem;
+  }
+  
+  .ticket-form input[type="text"],
+  .ticket-form select,
+  .ticket-form textarea {
+    font-size: 1.4rem;
+  }
+  
+  .homepage img {
+    width: 40%;
+    max-width: 150px;
+    margin-bottom: 10px;
+  }
+  
+  .homepage h2 {
+    font-size: 1.8rem;
+  }
+  
+  .homepage p {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+  
+  .loginregister .button {
+    font-size: 1.4rem;
+  }
+  
+  #login h2 {
+    font-size: 1.8rem;
+  }
+  
+  #login .register_form input[type="text"],
+  #login .register_form input[type="password"] {
+    font-size: 1.4rem;
+  }
+  
+  #login p {
+    font-size: 1.4rem;
+  }
+  
+  .profile h1 {
+    font-size: 1.8rem;
+  }
+  
+  .profile label {
+    font-size: 1.4rem;
+    margin-bottom: 3px;
+  }
+  
+  .profile h3 {
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+  }
+  
+  .sign-up h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .sign-up .register_form input,
+  .sign-up .register_form select {
+    font-size: 1.4rem;
+  }
+}
