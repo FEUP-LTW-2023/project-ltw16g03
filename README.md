@@ -10,7 +10,11 @@ http://localhost:9000/pages/index.php
 ```
 
 ### Commands to execute the project
-Make sure you are in the project's folder and run the following command:
+Make sure you are in the project's folder and run the following commands:
+```sh
+sqlite3 database/tickets.db < database/script.sql
+```
+
 ```sh
 php -S localhost:9000
 ```
